@@ -45,6 +45,8 @@ function clearTable() {
     var allTdElements = document.getElementsByTagName('td');
     for (let td of allTdElements) {
         td.textContent = "";
+        td.style.backgroundColor="rgb(57, 219, 165)";
+
     }
 }
 

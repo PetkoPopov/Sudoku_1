@@ -37,13 +37,16 @@ if( row == 0 ){
                 tdElement.textContent = '';
             }else{
                 tdElement.textContent=count;
+                // setTimeout(error(tdElement.id),3000);
             }
             
                 // tdElement.textContent = row+'/'+coll;
             })
             
             tdElement.id = (row)*9+coll;
+            
             tr.appendChild(tdElement);
+
         }
         table.appendChild(tr);
 

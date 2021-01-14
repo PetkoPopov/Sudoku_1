@@ -1,7 +1,7 @@
 
-const allTd=document.getElementsByTagName('td');
+const allTd = document.getElementsByTagName('td');
 
-const totalArr=getToatalArr();
+const totalArr = getToatalArr();
 
 
 function calc() {
@@ -115,17 +115,18 @@ function calc() {
     var tenArrHlp = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     var isDone = false;
     // var arrTreeForTd = [];
-    for (let td of allTd) {
-        // console.log(typeof(td.textContent))
-        if (td.textContent == '') {
+    // for (let td of allTd) {
+    //     // console.log(typeof(td.textContent))
+    //     if (td.textContent == '') {
 
-            var arrTreeForTd = findTreeArraysForOneTd(totalArr, td);
-            isDone = findNumberByCount(arrTreeForTd, td);
+    //         var arrTreeForTd = findTreeArraysForOneTd(totalArr, td);
+    //         isDone = findNumberByCount(arrTreeForTd, td);
 
-            if (isDone) break;
-        }
+    //         if (isDone) break;
+    //     }
 
-    }
+    // }
+    findNumberByCount2();
     /////////////////////////////////////////
     ///
     ///   при кликане на бутона
@@ -154,13 +155,14 @@ function findNumberByAnalise(totalArr) {
     // 
     //////////////////////////
     let countArr = 0;
+    let result = false;
     for (let arr of totalArr) {
         // only 9 times 
         countArr++
         if (countArr == 10) break;
         ////////////////
         var hlp = 10;
-        var idHelp=100;
+        var idHelp = 100;
         var numHlp = 0;
         /// сега arr е само един масив проверяваме кои цифри му липсват
         //////////////////////////////////////////////
@@ -176,7 +178,8 @@ function findNumberByAnalise(totalArr) {
             if (hlp == 10) { } else {
                 /// не забравяй хелпър-а е числото на дупката а не Id на елемента 
                 arr[hlp].textContent = numHlp;
-                colorisedElement(idHelp,"yellowgreen");
+                colorisedElement(idHelp, "yellowgreen");
+                result = true;
                 break;
             }
             //проверява  всички дупки 
@@ -200,11 +203,11 @@ function findNumberByAnalise(totalArr) {
                         if (hlp == 10) {
                             hlp = hollow;
                             numHlp = missNum;
-                            idHelp=id;
+                            idHelp = id;
                         } else {
                             hlp = 10;
                             numHlp = 0;
-                            idHelp=100;
+                            idHelp = 100;
                             breakHllp = true;
 
                             break;
@@ -219,9 +222,8 @@ function findNumberByAnalise(totalArr) {
         }
 
         // break; // този break взема само първия масив
-
-
     }
+    return result;
 }
 
 
@@ -282,7 +284,10 @@ function findIdSquare(id) {
     }
 }
 
-
+/**
+ * показва липсващете цифри в един ред , колона, или голяма кутия
+ * 
+ */
 function missingNumbers(arr) {
     let arrNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
     for (let number of arr) {
@@ -423,7 +428,7 @@ function colorAllArray(arr) {
 
         td.style.backgroundColor = "rgb(143, 219, 57)";
     }
- }
+}
 
 ////////////////////
 /////////////////////////
@@ -547,6 +552,7 @@ function findNumberAnlaseByColumn(totalArr) {
     // 
     //////////////////////////
     let countArr = 0;
+    let result = false;
     for (let arr of totalArr) {
         // only 9 times 
         countArr++
@@ -570,7 +576,8 @@ function findNumberAnlaseByColumn(totalArr) {
                 }
                 if (hlp == 10) { } else {
                     arr[hlp].textContent = numHlp;
-                    arr[hlp].style.backgroundColor="green";
+                    arr[hlp].style.backgroundColor = "green";
+                    result = true;
                     break;
                 }
                 //проверява  всички дупки 
@@ -615,6 +622,7 @@ function findNumberAnlaseByColumn(totalArr) {
 
         }
     }
+    return result;
 }
 
 ////////////////////////
@@ -628,6 +636,7 @@ function findNumberBySqrAnalise(totalArr) {
     // 
     //////////////////////////
     let countArr = 0;
+    let result = false;
     for (let arr of totalArr) {
         // only 9 times 
         countArr++
@@ -651,9 +660,9 @@ function findNumberBySqrAnalise(totalArr) {
                 }
                 if (hlp == 10) { } else {
                     arr[hlp].textContent = numHlp;
-                    
-                    arr[hlp].style.backgroundColor='yellow';
 
+                    arr[hlp].style.backgroundColor = 'yellow';
+                    result = true;
                     break;
                 }
                 //проверява  всички дупки 
@@ -698,14 +707,14 @@ function findNumberBySqrAnalise(totalArr) {
 
         }
     }
-
+    return result;
 }
 
 ////////////////////////////////
 //////////////////////////////
-function colorisedElement(id,color){
-    let allTd=document.getElementsByTagName('td');
-allTd[id].style.backgroundColor=color;
+function colorisedElement(id, color) {
+    let allTd = document.getElementsByTagName('td');
+    allTd[id].style.backgroundColor = color;
 
 
 }
@@ -713,32 +722,184 @@ allTd[id].style.backgroundColor=color;
 
 /////////////////////////////
 ///////////////////////
-function error(id){ 
-          let threeArr =  findTreeArraysForOneTd(totalArr , allTd[id]);
-        let val = allTd[id].textContent;
+function error(id) {
+    let threeArr = findTreeArraysForOneTd(totalArr, allTd[id]);
+    let val = allTd[id].textContent;
 
-       // console.log(allTd[id]);
- for(let arr of threeArr){
-       for(let array of arr){
-             ///////////////
-             //
-             //   вземам първия от трите масива
-             //
-             //////////////////////
-             for(let a of array){
-                
-                
-                if(a.textContent == val && a.id !== allTd[id].id  ){
-                    allTd[id].style.backgroundColor="rgb(170,24,134)";
-                    return true ;
+    // console.log(allTd[id]);
+    for (let arr of threeArr) {
+        for (let array of arr) {
+            ///////////////
+            //
+            //   вземам първия от трите масива
+            //
+            //////////////////////
+            for (let a of array) {
+
+
+                if (a.textContent == val && a.id !== allTd[id].id) {
+                    setTimeout(function () {
+                        allTd[id].style.backgroundColor = "rgb(170,24,134)";
+                    })
+
+                    setTimeout(function () {
+                        allTd[id].style.backgroundColor = "rgb(57, 219, 165)";
+                    }, 6000);
+                    return true;
                 }
 
-                
-             }
 
-       }
+            }
 
- }
-          
+        }
 
+    }
+
+
+}
+
+//////////////////////
+//////////////////
+
+function showAllErrors() {
+    let result = false;
+    for (let tdElement of allTd) {
+        if (tdElement.textContent != '') {
+
+            if (error(tdElement.id))
+                result = true;
+
+        }
+    }
+    return result;
+}
+//////////////////////////
+//////////////////
+function eraseError() {
+    let result = false;
+    for (let tdElement of allTd) {
+        if (tdElement.textContent != '') {
+
+            if (error(tdElement.id)) {
+                tdElement.textContent = '';
+                tdElement.style.backgroundColor = 'rgb(57, 219, 165)'
+            }
+            result = true;
+
+        }
+    }
+    return result;
+}
+
+
+
+///////////
+//////////
+function findNumberByCount2() {
+    for (let td of allTd) {
+        // console.log(typeof(td.textContent))
+        if (td.textContent == '') {
+
+            var arrTreeForTd = findTreeArraysForOneTd(totalArr, td);
+            isDone = findNumberByCount(arrTreeForTd, td);
+
+            if (isDone) {
+                return true;
+                break;
+            }
+        }
+
+    }
+}
+
+
+///////////////////////
+///////////////////
+
+function startCalculation(arrRestore) {
+    let res = false;
+
+    for (let td of allTd) {
+        if (td.id == 18) return true;
+        // counter++;
+        // if(counter  == 9)break;
+        if (td.textContent == '') {
+            let allPosibleNumbers = posibleNumbersForField(td);
+            if (allPosibleNumbers.lenght == 0) {
+                return true;
+            }
+            for (let int of allPosibleNumbers) {
+                td.textContent = int;
+                arrRestore.push(td.id);
+                res = true;
+
+
+
+            }
+
+        }
+        if (res) break;
+    }
+    // startCalculation();
+}
+
+function callAnalises() {
+
+    if (findNumberByCount2) { startCalculation(); }
+    if (findNumberByAnalise(totalArr)) { startCalculation(); }
+    if (findNumberAnlaseByColumn(totalArr)) { startCalculation(); }
+    if (findNumberBySqrAnalise(totalArr)) { startCalculation(); }
+}
+
+/////
+///////////
+function posibleNumbersForField(td) {
+    let arrThree = findTreeArraysForOneTd(totalArr, td);
+    let arrNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    for (let array of arrThree) {
+        // console.log(array);
+
+        for (let arr of array) {
+
+            for (let a of arr) {
+                if (arrNumbers.includes(a.textContent)) {
+                    arrNumbers.splice(arrNumbers.indexOf(a.textContent), 1);
+                }
+            }
+
+        }
+    }
+    if (arrNumbers.lenght == 0) {
+        return false
+    } else {
+
+        return arrNumbers;
+    }
+
+}
+
+///////////////
+//////////////
+function restore(arrRestore = []) {
+    for (let td of allTd) {
+        if (arrRestore.includes(td.id)) {
+            td.textContent = '';
+        }
+    }
+
+
+}
+
+function test(number=[]) {
+if(number.length == 0 )return true;
+
+    for (let n = 0; n < number.length; n++) {
+
+        console.log(number[n])
+        
+    }
+    number.splice(number.length - 1, 1);
+        // console.log(number);
+        test(number);
+   
 }
