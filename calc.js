@@ -126,7 +126,7 @@ function calc() {
     //     }
 
     // }
-    findNumberByCount2();
+    let a = findNumberByCount2();
     /////////////////////////////////////////
     ///
     ///   при кликане на бутона
@@ -135,14 +135,16 @@ function calc() {
 
     /////////////////////////////
     //
-    findNumberByAnalise(totalArr);
+    let b = findNumberByAnalise(totalArr);
     //
     //
-    findNumberAnlaseByColumn(totalArr);
+    let c = findNumberAnlaseByColumn(totalArr);
     //
     ///////////////////////////////////////////////////
 
-    findNumberBySqrAnalise(totalArr);
+    let d = findNumberBySqrAnalise(totalArr);
+    if(a||b||c||d){return true}
+
 }
 
 
@@ -816,40 +818,126 @@ function findNumberByCount2() {
 ///////////////////////
 ///////////////////
 
-function startCalculation(arrRestore) {
+function startCalculation() {
     let res = false;
+    let arrRestore = [];
+    for (let arr of totalArr) {
+        if(arr.length != 0){
 
-    for (let td of allTd) {
-        if (td.id == 18) return true;
-        // counter++;
-        // if(counter  == 9)break;
-        if (td.textContent == '') {
-            let allPosibleNumbers = posibleNumbersForField(td);
-            if (allPosibleNumbers.lenght == 0) {
-                return true;
+            let missNum = missingNumbers(arr);
+            let nums = test2(missNum);
+            ////////////////////////
+            ///
+            /// nums е масив с масиви с всички възможни компбинации
+            ///
+            /////////////////////////////  
+    
+            let arrSave = save();
+            for (let num of nums) {
+    
+                while (!showAllErrors()) {
+    
+                    fillArr(arr, num) ;
+                   if( calc() ){
+                       continueCalc();
+                   }
+                    
+                    
+                }
+                
+            restoreByEmptyId(arrSave);
             }
-            for (let int of allPosibleNumbers) {
-                td.textContent = int;
-                arrRestore.push(td.id);
-                res = true;
-
-
-
-            }
-
+    
+    
+           // break;// only first array
+    
         }
-        if (res) break;
     }
-    // startCalculation();
+
 }
 
-function callAnalises() {
+function continueCalc(){
+    let ttArr = getToatalArr();
+    for (let arr of ttArr) {
+        if(arr.length != 0){
 
-    if (findNumberByCount2) { startCalculation(); }
-    if (findNumberByAnalise(totalArr)) { startCalculation(); }
-    if (findNumberAnlaseByColumn(totalArr)) { startCalculation(); }
-    if (findNumberBySqrAnalise(totalArr)) { startCalculation(); }
+            let missNum = missingNumbers(arr);
+            let nums = test2(missNum);
+            ////////////////////////
+            ///
+            /// nums е масив с масиви с всички възможни компбинации
+            ///
+            /////////////////////////////  
+    
+            let arrSave = save();
+            for (let num of nums) {
+    
+                while (!showAllErrors()) {
+    
+                    fillArr(arr, num);
+                    
+                    ;
+                   if( calc() ){
+                       continueCalc();
+                   }
+                }
+                
+            restoreByEmptyId(arrSave);
+            }
+    
+    
+            //break;// only first array
+    
+        }
+    }
 }
+
+var save=(()=> {
+    let saveBtn = document.getElementById('save');
+    saveBtn.addEventListener('click',function(){
+
+        var saveTable = [];
+        for (let td of allTd) {
+            if (td.textContent == '') {
+                saveTable.push(td.id);
+            }
+    
+        }
+    })
+    return saveTable;
+
+})()
+
+///////////////
+//////////////////
+/**
+ * arr масив частично попълнен с (дупки)
+ * num масив с числа които че запълнят дупките
+ * 
+ * @param [] arr 
+ * @param [] nums 
+ */
+function fillArr(arr, nums) {
+    for (let num of nums) {
+
+        for (let a of arr) {
+
+            if (a.textContent == '') {
+
+                a.textContent = num;
+                break;
+            }
+        }
+
+
+    }
+    return arr;
+}
+
+
+
+
+
 
 /////
 ///////////
@@ -880,7 +968,12 @@ function posibleNumbersForField(td) {
 
 ///////////////
 //////////////
-function restore(arrRestore = []) {
+/**
+ * подаваме  id-та на клетките които искаме да нулираме 
+ * @param [] arrRestore 
+ */
+function  restoreByEmptyId(arrRestore = []) {
+    // console.log(save);return true;
     for (let td of allTd) {
         if (arrRestore.includes(td.id)) {
             td.textContent = '';
@@ -890,16 +983,53 @@ function restore(arrRestore = []) {
 
 }
 
-function test(number=[]) {
-if(number.length == 0 )return true;
+//////////////
+////////////
 
-    for (let n = 0; n < number.length; n++) {
 
-        console.log(number[n])
-        
+
+
+function test2(arr) {
+    let result = [];
+    let num = arr.length;
+    let numCount = Math.pow(num, num);
+    for (let i = 0; i < numCount; i++) {
+        res = convert2(num, i)
+        let hlpRes = [];
+        for (let int of res) {
+            hlpRes.push(arr[int])
+        }
+        if (hlpRes.length == num) {
+            result.push(hlpRes)
+        }
+
     }
-    number.splice(number.length - 1, 1);
-        // console.log(number);
-        test(number);
-   
+
+    return result;
+
 }
+
+///////////////////////////////
+///////////////////////////////
+
+function convert2(numCount, i) {
+    let hlp;
+    let res = [];
+    while (i > 0) {
+        hlp = i % numCount;
+        //    console.log(hlp);
+        i = Math.floor(i / numCount);
+
+        if (res.includes(hlp)) return [];
+
+        res.splice(0, 0, hlp);
+    }
+    if (res.length < numCount) {
+        if (res.includes(0)) { } else { res.unshift(0); }
+
+    }
+    return res;
+
+
+}
+
