@@ -3,7 +3,9 @@ const allTd = document.getElementsByTagName('td');
 
 const totalArr = getToatalArr();
 
-
+/**
+ * 
+ */
 function calc() {
 
     // const allTd = document.getElementsByTagName('td');
@@ -143,11 +145,14 @@ function calc() {
     ///////////////////////////////////////////////////
 
     let d = findNumberBySqrAnalise(totalArr);
-    if(a||b||c||d){return true}
+    if (a || b || c || d) { return true } else { return false; }
 
 }
 
-
+/**
+ * 
+ * анлизира хоризонтали 
+ */
 function findNumberByAnalise(totalArr) {
 
     //////////////////////////
@@ -821,92 +826,117 @@ function findNumberByCount2() {
 function startCalculation() {
     let res = false;
     let arrRestore = [];
-    for (let arr of totalArr) {
-        if(arr.length != 0){
+    // let ttArr = getToatalArr();
+    for (let arr in totalArr) {
+        // console.log(arr);
 
-            let missNum = missingNumbers(arr);
+        if (arr == 18) {
+            //    console.log(totalArr[arr])
+            //    return 1;
+            let missNum = missingNumbers(totalArr[arr]);
             let nums = test2(missNum);
             ////////////////////////
             ///
             /// nums е масив с масиви с всички възможни компбинации
             ///
             /////////////////////////////  
-    
+
             let arrSave = save();
             for (let num of nums) {
-    
-                while (!showAllErrors()) {
-    
-                    fillArr(arr, num) ;
-                   if( calc() ){
-                       continueCalc();
-                   }
-                    
-                    
+                console.log(num);
+                fillArr(arr, num);
+                // break;
+                let hlp = true;
+                while (hlp) {
+                    hlp = calc();
+
                 }
-                
-            restoreByEmptyId(arrSave);
+                if (!showAllErrors) {
+
+                    break;
+                }
+
+
             }
-    
-    
-           // break;// only first array
-    
+
+
         }
+
+
+        // break;//only first array
     }
 
 }
 
-function continueCalc(){
+function continueCalc(index) {
     let ttArr = getToatalArr();
-    for (let arr of ttArr) {
-        if(arr.length != 0){
+    let arr = ttArr[index];
 
-            let missNum = missingNumbers(arr);
-            let nums = test2(missNum);
-            ////////////////////////
-            ///
-            /// nums е масив с масиви с всички възможни компбинации
-            ///
-            /////////////////////////////  
-    
-            let arrSave = save();
-            for (let num of nums) {
-    
-                while (!showAllErrors()) {
-    
-                    fillArr(arr, num);
-                    
-                    ;
-                   if( calc() ){
-                       continueCalc();
-                   }
-                }
-                
-            restoreByEmptyId(arrSave);
+    let missNum = missingNumbers(arr);
+    let nums = test2(missNum);
+    ////////////////////////
+    ///
+    /// nums е масив с масиви с всички възможни компбинации
+    ///
+    /////////////////////////////  
+
+
+    for (let num of nums) {
+
+        while (!showAllErrors()) {
+
+            fillArr(arr, num);
+
+
+            if (calc()) {
+                console.log('result');
             }
-    
-    
-            //break;// only first array
-    
         }
+
+
     }
+
+
+    //break;// only first array
+
+
+
 }
 
-var save=(()=> {
-    let saveBtn = document.getElementById('save');
-    saveBtn.addEventListener('click',function(){
+// var save=(()=> {
+function save() {
 
-        var saveTable = [];
-        for (let td of allTd) {
-            if (td.textContent == '') {
-                saveTable.push(td.id);
-            }
-    
+    var saveTable = [];
+    for (let td of allTd) {
+        if (td.textContent == '') {
+            saveTable.unshift(td.id);
         }
-    })
+
+    }
+
     return saveTable;
 
-})()
+
+}
+// })()
+///////////////
+//////////////
+
+/**
+ * подаваме  id-та на клетките които искаме да нулираме 
+ * @param [] arrRestore 
+ */
+function restoreByEmptyId(arrRestore = []) {
+    // console.log(save);return true;
+    for (let td of allTd) {
+        if (arrRestore.includes(td.id)) {
+            td.textContent = '';
+        }
+    }
+
+
+}
+
 
 ///////////////
 //////////////////
@@ -966,22 +996,6 @@ function posibleNumbersForField(td) {
 
 }
 
-///////////////
-//////////////
-/**
- * подаваме  id-та на клетките които искаме да нулираме 
- * @param [] arrRestore 
- */
-function  restoreByEmptyId(arrRestore = []) {
-    // console.log(save);return true;
-    for (let td of allTd) {
-        if (arrRestore.includes(td.id)) {
-            td.textContent = '';
-        }
-    }
-
-
-}
 
 //////////////
 ////////////
@@ -1033,3 +1047,413 @@ function convert2(numCount, i) {
 
 }
 
+/////////////////
+////////////////////
+function add() {
+
+    for (let index in totalArr) {
+        let counter = 0;
+        if (index < 9) {
+
+            for (let int in totalArr[index]) {
+
+                if (totalArr[index][int].textContent != '') {
+                    counter++;
+                    if (counter == 3) {
+
+                        let lines = findIndexArr(index);
+                        let sqrIndex = findSQR(index, int);
+                        let missNumbers = missingNumbers(totalArr[sqrIndex[2]]);
+                        for (let i of missNumbers) {
+                            //  console.log(totalArr[lines[0]]);return 1;
+                            for (let comprend of totalArr[lines[0]]) {
+                                //  console.log(comprend.textContent , i);
+                                if (comprend.textContent == i) {
+                                    //   console.log()
+
+                                    let id = findTdElementByTwoArrays(totalArr[sqrIndex[2]], totalArr[lines[1]]);
+                                    let helper1 = allTd[id].textContent;
+                                    allTd[id].textContent = i;
+                                    findComplexAnalise(totalArr[sqrIndex[0]]);
+                                    findComplexAnalise(totalArr[sqrIndex[1]]);
+
+                                    allTd[id].textContent = helper1;
+                                }
+
+                            }
+                            for (let comprend of totalArr[lines[1]]) {
+                                //  console.log(comprend.textContent , i);
+                                if (comprend.textContent == i) {
+                                    //   console.log()
+
+                                    let id = findTdElementByTwoArrays(totalArr[sqrIndex[2]], totalArr[lines[0]]);
+                                    let helper = allTd[id].textContent;
+                                    allTd[id].textContent = i;
+
+                                    findComplexAnalise(totalArr[sqrIndex[0]]);
+                                    findComplexAnalise(totalArr[sqrIndex[1]]);
+                                    allTd[id].textContent = helper;
+                                }
+
+
+
+                            }
+
+                        }
+                    }
+
+
+                }
+                if ((int + 1) % 3 == 0) {
+                    counter = 0;
+                }
+
+            }
+
+
+        } else if (index < 18) {
+
+            // console.log('you IN INDEX ' , counter ,index);
+            for (let int in totalArr[index]) {
+
+                if (totalArr[index][int].textContent != '') {
+                    counter++;
+                    if (counter == 3) {
+                        let horisontales = findIndexHorisontales(index);
+
+                        let sqrIndex = findSqrHor(index, int);
+                        
+                        let missNumbers = missingNumbers(totalArr[sqrIndex[2]]);
+                        // console.log(index, int ,'----miss num --->',missNumbers, sqrIndex);continue;
+                        for (let i of missNumbers) {
+                            //  console.log(totalArr[lines[0]]);return 1;
+                            for (let comprend of totalArr[horisontales[0]]) {
+                                //  console.log(comprend.textContent , i);
+                                if (comprend.textContent == i) {
+                                    //   console.log()
+
+                                    let id = findTdElementByTwoArrays(totalArr[sqrIndex[2]], totalArr[horisontales[1]]);
+                                    let helper1 = allTd[id].textContent;
+                                    allTd[id].textContent = i;
+                                    findComplexAnalise(totalArr[sqrIndex[0]]);
+                                    findComplexAnalise(totalArr[sqrIndex[1]]);
+
+                                    allTd[id].textContent = helper1;
+                                }
+
+                            }
+                            for (let comprend of totalArr[horisontales[1]]) {
+                                //  console.log(comprend.textContent , i);
+                                if (comprend.textContent == i) {
+                                    //   console.log()
+
+                                    let id = findTdElementByTwoArrays(totalArr[sqrIndex[2]], totalArr[horisontales[0]]);
+                                    let helper = allTd[id].textContent;
+                                    allTd[id].textContent = i;
+
+                                    findComplexAnalise(totalArr[sqrIndex[0]]);
+                                    findComplexAnalise(totalArr[sqrIndex[1]]);
+                                    allTd[id].textContent = helper;
+                                }
+
+
+
+                            }
+
+                        }
+                    }
+
+
+                }
+                if ((int + 1) % 3 == 0) {
+                    counter = 0;
+                }
+
+            }
+
+
+
+
+        }
+
+
+
+    }
+
+}
+/////////////////////////////////////////////////
+////////////////////////////////
+function findIndexHorisontales(i) {
+    i = Number(i);
+    let horisontales = [];
+    if (i % 3 == 0) {
+        horisontales.push(i + 1);
+        horisontales.push(i + 2);
+
+        return horisontales;
+    } else if ((i - 1) % 3 == 0) {
+        horisontales.push(i - 1);
+        horisontales.push(i + 1);
+        return horisontales;
+    } else if ((i - 2) % 3 == 0) {
+        horisontales.push(i - 1);
+        horisontales.push(i - 2);
+        return horisontales;
+
+    }
+
+}
+////////////////////////////////////////////////
+/////////////////////////////////////////////////
+function findSqrHor(index, int) {
+    index = Number(index);
+    int = Number(int);
+    let sqrIndex = [];
+    if (index <= 11) {
+        if (int <= 2) {
+            sqrIndex.push('21');
+            sqrIndex.push('24');
+            sqrIndex.push('18');
+            return sqrIndex;
+        } else if (int <= 5) {
+
+            sqrIndex.push('18');
+            sqrIndex.push('24');
+            sqrIndex.push('21');
+            return sqrIndex;
+        } else if (int <= 8) {
+
+            sqrIndex.push('18');
+            sqrIndex.push('21');
+            sqrIndex.push('24');
+            return sqrIndex;
+        }
+
+    } else if (index <= 14) {
+        if (int <= 2) {
+            sqrIndex.push('22');
+            sqrIndex.push('25');
+            sqrIndex.push('19');
+            return sqrIndex;
+        } else if (int <= 5) {
+
+            sqrIndex.push('19');
+            sqrIndex.push('25');
+            sqrIndex.push('22');
+            return sqrIndex;
+        } else if (int <= 8) {
+
+            sqrIndex.push('19');
+            sqrIndex.push('22');
+            sqrIndex.push('25');
+            return sqrIndex;
+        }
+
+    } else if (index <= 17) {
+
+        if (int <= 2) {
+            sqrIndex.push('26');
+            sqrIndex.push('23');
+            sqrIndex.push('20');
+            return sqrIndex;
+        } else if (int <= 5) {
+
+            sqrIndex.push('26');
+            sqrIndex.push('20');
+            sqrIndex.push('23');
+            return sqrIndex;
+        } else if (int <= 8) {
+
+            sqrIndex.push('20');
+            sqrIndex.push('23');
+            sqrIndex.push('26');
+            return sqrIndex;
+        }
+    }
+}
+//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+function findComplexAnalise(arr) {
+
+    let result = false;
+
+    var hlp = 10;
+
+    var numHlp = 0;
+    /// сега arr е само един масив проверяваме кои цифри му липсват
+    //////////////////////////////////////////////
+    let missNumbers = missingNumbers(arr);  ////
+    /////////////////////////////////////////////
+    /// за всяко липсващо число проверяваме дали е възможно да е на тази колона 
+    ///////////////////////////////////////
+
+    for (let missNum of missNumbers) {
+        let breakHllp = false;
+        if (breakHllp) {
+            break;
+        }
+        if (hlp == 10) { } else {
+            arr[hlp].textContent = numHlp;
+
+            arr[hlp].style.backgroundColor = 'red';
+            result = true;
+            break;
+        }
+        //проверява  всички дупки 
+        for (let hollow in arr) {
+
+            if (breakHllp) break;
+
+            if (arr[hollow].textContent == '') {
+
+                let id = Number(arr[hollow].id);
+
+
+                let indexHorisontalArray = Math.floor(id / 9);
+
+                let indexSqrArray = findIdSquare(id);
+                let indexVerticalArray = (id % 9) + 9;
+                let pos = false;
+                pos = posible(totalArr[indexHorisontalArray], totalArr[indexVerticalArray], missNum);
+
+                if (pos) {
+                    if (hlp == 10) {
+                        hlp = hollow;
+                        numHlp = missNum;
+                    } else {
+                        hlp = 10;
+                        numHlp = 0;
+                        breakHllp = true;
+
+                        break;
+                    }
+                    // console.log(missNum + '<--- missNum  <>   is posible ---> ' + pos + '   arr[hollow].id---->' + arr[hollow].id);
+                    // console.log('======================================')
+
+                }
+
+            }
+        }
+
+    }
+
+
+    return result;
+}
+
+
+
+///////////////////////////
+//////////////////////////
+function findTdElementByTwoArrays(sqrArray, lineArray) {
+
+    for (let i of sqrArray) {
+        for (let l of lineArray) {
+            if (i.id == l.id) {
+                return i.id;
+            }
+        }
+    }
+
+}
+/////////////////
+//////////////
+function findSQR(index, int) {
+    index = Number(index);
+    int = Number(int);
+    // console.log(index , int);return true;
+    //////////
+    // int == 2 , 5 , 8 
+    //////////
+    let result = [];
+    if (index <= 2) {
+        if (int == 2) {
+            result.push("19");
+            result.push('20');
+            result.push('18');
+            return result;
+        } else if ((int == 5)) {
+            result.push('18');
+            result.push('20');
+            result.push('19')
+            return result;
+
+        } else if (int == 8) {
+            result.push('18');
+            result.push('19');
+            result.push('20');
+            return result;
+        }
+
+    }
+    else if (index <= 5) {
+        if (int == 2) {
+            result.push("22");
+            result.push('23');
+            result.push('21');
+            return result;
+        } else if ((int == 5)) {
+            result.push('21');
+            result.push('23');
+            result.push('22');
+            return result;
+
+        } else if (int == 8) {
+            result.push('22');
+            result.push('21');
+            result.push('23');
+            return result;
+        }
+
+    } else if (index > 5) {
+
+        if (int == 2) {
+            result.push("25");
+            result.push('26');
+            result.push('24');
+            return result;
+        } else if (int == 5) {
+            result.push('24');
+            result.push('26');
+            result.push('25');
+            return result;
+
+        } else if (int == 8) {
+            result.push('24');
+            result.push('25');
+            result.push('26');
+            return result;
+        }
+    } else {
+        return false;
+    }
+
+
+}
+//////////////////
+////////////////
+function findIndexArr(number) {
+    /////////// number >= 0 && number <= 8
+    let lines = [];
+    number = Number(number);
+    if ((number + 1) % 3 == 0) {
+        lines.unshift(String(number - 1));
+        lines.unshift(String(number - 2));
+    } else if (number % 3 == 0) {
+        lines.unshift(String(number + 1));
+        lines.unshift(String(number + 2));
+    } else if ((number - 1) % 3 == 0) {
+        lines.unshift(String(number - 1));
+        lines.unshift(String(number + 1));
+    }
+    return lines;
+}
+
+
+/////////////////////
+///////////////////
+function findNummberByLines() {
+
+
+} 
