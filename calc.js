@@ -798,8 +798,6 @@ function eraseError() {
     return result;
 }
 
-
-
 ///////////
 //////////
 function findNumberByCount2() {
@@ -892,17 +890,13 @@ function continueCalc(index) {
                 console.log('result');
             }
         }
-
-
     }
-
 
     //break;// only first array
 
-
-
 }
 
+///////////////////
 // var save=(()=> {
 function save() {
 
@@ -911,12 +905,10 @@ function save() {
         if (td.textContent == '') {
             saveTable.unshift(td.id);
         }
-
     }
-
+    // document.write("the table is saved")b;
+    console.log('table is saved');
     return saveTable;
-
-
 }
 // })()
 ///////////////
@@ -964,11 +956,6 @@ function fillArr(arr, nums) {
     return arr;
 }
 
-
-
-
-
-
 /////
 ///////////
 function posibleNumbersForField(td) {
@@ -995,12 +982,8 @@ function posibleNumbersForField(td) {
     }
 
 }
-
-
 //////////////
 ////////////
-
-
 
 
 function test2(arr) {
@@ -1122,7 +1105,7 @@ function add() {
                         let horisontales = findIndexHorisontales(index);
 
                         let sqrIndex = findSqrHor(index, int);
-                        
+
                         let missNumbers = missingNumbers(totalArr[sqrIndex[2]]);
                         // console.log(index, int ,'----miss num --->',missNumbers, sqrIndex);continue;
                         for (let i of missNumbers) {
@@ -1455,5 +1438,66 @@ function findIndexArr(number) {
 ///////////////////
 function findNummberByLines() {
 
+}
 
-} 
+function doSomethingAndRestore(id, number) {
+
+    let saveTable = save();
+
+    ////////////////
+    // do something without concerns 
+    // after wil be restore previos value
+    //////////////////////
+    // doSomething();  //////избира къде липсват само две цифри и слага едната :)
+    //////////////////////
+    allTd[id].textContent = number;
+    if (calc()) {
+        if (showAllErrors()) {
+
+            setTimeout(function () {
+
+                restoreByEmptyId(saveTable)
+
+            }
+                , 4000);
+            return false;
+        }
+
+    }
+
+
+    return true;
+}
+
+function doSomething() {
+
+    for (let arr of totalArr) {
+
+        let missNum = missingNumbers(arr);
+        if (missNum.length == 2) {
+            for (let a of arr) {
+                if (a.textContent == "") {
+                    // a.textContent = missNum[0];break;
+                    if (doSomethingAndRestore(a.id, missNum[0])) { } else {
+                        doSomethingAndRestore(a.id, missNum[1]);
+                    }
+                }
+            }
+        } else if (missNum.length == 3) {
+            for (let a of arr) {
+                if (a.textContent == "") {
+                    // a.textContent = missNum[0];break;
+                    if (doSomethingAndRestore(a.id, missNum[0])) { }
+                    else if (doSomethingAndRestore(a.id, missNum[1])) {
+                    } else {
+                        doSomethingAndRestore(a.id, missNum[1]);
+                    }
+                }
+            }
+        }
+
+
+    }
+
+
+}
