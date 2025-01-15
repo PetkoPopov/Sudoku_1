@@ -233,7 +233,13 @@ function findNumberByAnalise(totalArr) {
     return result;
 }
 
-
+/**
+ * казва ни дали едно число може да бъде на този вертикал или квадрат
+ * @param {arr} arrVertical 
+ * @param {arr} arrSqr 
+ * @param {number} missingNumber 
+ * @returns bollen
+ */
 function posible(arrVertical, arrSqr, missingNumber) {
     // console.log('inside posible' + typeof (missingNumber))
 
@@ -376,12 +382,16 @@ function findTreeArraysForOneTd(totalArr, td) {
     return arrTreeForTd;
 }
 ////////////////////////////
-////////////////////////
+/**
+ * когато добавите число и искате да видите кои 
+ * редове кутии и вертикали заема кликнете Switch Hover
+ */
 
 function swichHover() {
 
 
     let hover = document.getElementById('hover');
+    console.log(hover.textContent)
     //console.log(hover.textContent);
     var allTd = document.getElementsByTagName('td');
 
@@ -390,39 +400,39 @@ function swichHover() {
 
         if (tdElement.textContent == '') continue;
 
-        if (hover.textContent === "Swich Hover") {
-            tdElement.addEventListener('mouseover', function () {
 
-                for (let arr of totalArr) {
+        tdElement.addEventListener('mouseover', function () {
 
-                    for (let tdFromArr of arr) {
+            for (let arr of totalArr) {
 
-                        if (tdFromArr.textContent == tdElement.textContent) {
+                for (let tdFromArr of arr) {
 
-                            colorAllArray(arr);
-                            break;
-                        }
+                    if (tdFromArr.textContent == tdElement.textContent) {
 
+                        colorAllArray(arr);
+                        break;
                     }
 
-
-
-                    /////////// tdElement.style.backgroundColor = "rgb(143, 219, 57)";
-                }
-
-            })
-
-            tdElement.addEventListener('mouseout', function () {
-
-                for (let tdElement of allTd) {
-                    tdElement.style.backgroundColor = "rgb(57, 219, 165)"
                 }
 
 
-            })
-            // hover.textContent = 'Swich off hover';
-            hover.style.backgroundColor = ' rgb(236, 26, 156)'
-        }
+
+                /////////// tdElement.style.backgroundColor = "rgb(143, 219, 57)";
+            }
+
+        })
+
+        tdElement.addEventListener('mouseout', function () {
+
+            for (let tdElement of allTd) {
+                tdElement.style.backgroundColor = "rgb(57, 219, 165)"
+            }
+
+
+        })
+        // hover.textContent = 'Swich off hover';
+        hover.style.backgroundColor = ' rgb(236, 26, 156)'
+
     }
 
 }
@@ -725,10 +735,12 @@ function colorisedElement(id, color) {
 
 
 }
-
-
-/////////////////////////////
-///////////////////////
+/**
+ * 
+ * @param {int} id 
+ * chek for errors and return boolean
+ * @returns boolean
+ */
 function error(id) {
     let threeArr = findTreeArraysForOneTd(totalArr, allTd[id]);
     let val = allTd[id].textContent;
@@ -816,8 +828,6 @@ function findNumberByCount2() {
 
     }
 }
-
-
 ///////////////////////
 ///////////////////
 
@@ -928,10 +938,6 @@ function restoreByEmptyId(arrRestore = []) {
 
 
 }
-
-
-///////////////
-//////////////////
 /**
  * arr масив частично попълнен с (дупки)
  * num масив с числа които че запълнят дупките
@@ -958,6 +964,11 @@ function fillArr(arr, nums) {
 
 /////
 ///////////
+/**
+ * казва кои са възможните числа за дадено място
+ * @param {<td></td>} td 
+ * @returns array
+ */
 function posibleNumbersForField(td) {
     let arrThree = findTreeArraysForOneTd(totalArr, td);
     let arrNumbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];

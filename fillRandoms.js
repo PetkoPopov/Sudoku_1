@@ -17,16 +17,28 @@ function fillHalfTable() {
         
         var index = Math.round(Math.random() * 81);
         let value = Math.round(Math.random() * 9);
+        
         if (value == 0) {
-            value = '';
-        }
         allTdElements[index].textContent = value;
+        }
+
         if(error(index)){
             allTdElements[index].textContent='';
         }
     }
 }
+/**
+ * попълва първите три реда е три колони с правилни случайни числа
+ */
+function fill3Raws(){
 
+    var allTdElements = document.getElementsByTagName('td');
+    let nums=[1,2,3,4,5,6,7,8,9]
+    for(let i=0; i<9; i ++ ){
+       
+    }
+
+}
 
 
 

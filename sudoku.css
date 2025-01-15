@@ -1,0 +1,53 @@
+#calc {
+    position: fixed;
+    top: 30px;
+    left: 750px;
+    border-radius: 25%;
+    background-color: coral;
+    width: 106px;
+    height: 44px;
+    box-shadow: 10px 10px darkblue;
+}
+
+body {
+    background-color: rgb(57, 219, 165);
+}
+
+.fillHalfTable {
+    background-color: rgb(120, 175, 68);
+
+}
+
+.clear {
+    position: fixed;
+    top: 100px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgb(24, 204, 24);
+
+}
+
+.clear:hover {
+    background-color: blue;
+}
+
+#calc:hover {
+    background-color: blue;
+}
+
+#fillTreeRaws {
+    position: fixed;
+    top: 200px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color:forestgreen;
+}
+#fillTreeRaws:hover {
+background-color: aqua;
+}

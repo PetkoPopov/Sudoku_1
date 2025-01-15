@@ -1,46 +1,58 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="sudoku.css" />
 
-<body style="background-color: rgb(57, 219, 165);">
+<body>
         <!-- <body style="background-color: rgb(143, 219, 57);"></body> -->
 
         <div>
                 <table>
 
                 </table>
-        </div>
-        <div>
+                <!-- </div>
+        <div> -->
+                <button onclick="fillRandoms()" id="test">fill with
+                        random numbers</button>
+
+                <button id="calc" onclick="calc()"> CALC</button>
+                <button id="fillTreeRaws" onclick="fill3RawsAndTreeColls()">fillTreeRaws</button>
+                <button onclick="fillHalfTable()" class="fillHalfTable">fill Half
+                        Table</button>
+                <button onclick="clearTable()" class="clear">Clear
+                        Table</button>
+                <button onclick="fillCellId()" class="button" style="background-color: rgb(93, 145, 80);">fill Cell
+                        Id</button>
+
+                <button onclick="swichHover()" id="hover" style="background-color:rgb(170, 79, 27)">Swich
+                        Hover</button>
+
+
+
 
                 <button onclick="eraseError()" style="background-color: rgb(80, 245, 65);
  width:106px;height: 44px;border-radius: 5px ;
  border-color: rgb(124, 42, 201);">Erase Error</button>
- 
- <button onclick="showAllErrors()" style="background-color: rgb(245, 65, 206);width:106px ; height: 44px ;  border-radius: 5px ;
+
+                <button onclick="showAllErrors()" style="background-color: rgb(245, 65, 206);width:106px ; height: 44px ;  border-radius: 5px ;
  border-color: rgb(19, 6, 90);
  color:rgb(29, 29, 13);
  "> SHOW ERRORS </button>
- 
+
         </div>
-<div>
+        <div>
 
                 <button onclick="add()" style="background-color: rgb(65, 143, 245);
         width:106px;height: 44px;border-radius: 5px ;
         border-color: rgb(19, 6, 90);">start caculation</button>
 
-        <button style="background-color: coral ; width:106px; height: 44px;" id="calc" onclick="calc()"
-                style="background-color: rgb(157, 196, 231);"> CALC</button>
-        <button  onclick="doSomething()" style="background-color: rgb(80, 245, 65);
+
+                <button onclick="doSomething()" style="background-color: rgb(80, 245, 65);
         width:106px;height: 44px;border-radius: 5px ;
         border-color: rgb(124, 42, 201);">Put Some NUmber</button>
-        <a> {--- кликай тези  </a>
-       
-</div>
 
-        <button onclick="fillRandoms()" style="background-color: rgb(93,149,200);">fill with random numbers</button>
-        <button onclick="fillHalfTable()" style="background-color: rgb(120, 175, 68);">fill Half Table</button>
-        <button onclick="fillCellId()" style="background-color: rgb(93, 145, 80);">fill Cell Id</button>
-        <button onclick="clearTable()" style="background-color: rgb(24, 204, 24);">Clear Table</button>
-        <button onclick="swichHover()" id="hover" style="background-color:rgb(170, 79, 27)">Swich Hover</button>
+
+        </div>
+
 
         <script src="makeTable.js"></script>
         <script src="calc.js"></script>
