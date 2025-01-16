@@ -225,7 +225,8 @@ function findNumberByCount(arrTreeForTd, td) {
 ////////////////////////////
 
 function findTreeArraysForOneTd(td) {
-
+    console.log(td)
+    return
     let totalArr = getTotalArr()
     let arrTreeForTd = [];
     counter = 0;
@@ -688,19 +689,53 @@ function eraseError() {
  */
 function findNumberByCount2() {
 
-    let allTd = document.getElementsByTagName("td")
-    for (let element of allTd) {
-        
-         if(!element.textContent){
-            //  console.log(element.id)
-            //  continue
-            let arrTreeForTd = findTreeArraysForOneTd(element);
-             let isDone = findNumberByCount(arrTreeForTd, element);
-             if (isDone) { return true }
+    let arr = getTotalArr()
+    console.log('totalArr--->', arr)
+    let countArr = 0
+    for (const element of arr) {
+        countArr++
+        console.log(countArr)
+        let counter = 0
+        let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+
+        for (const e of element) {
+            if (nums.includes(e.textContent)) {
+                nums.splice(nums.indexOf(e.textContent), 1)
+                console.log(e.textContent)
+            } else if (!e.textContent) {
+                counter++
             }
-        // return
-        
+            if (counter > 1) { break }
+        }
+        console.log('counter--->', counter, nums.length)
+        if (nums.length == 1) {
+
+            for (const e of element) {
+                console.log('inside if --->', nums)
+                if (!e.textContent) {
+                    e.textContent = nums[0]
+                    e.style.backgroundColor = "rgb(219,176,27)"
+                }
+            }
+        }
     }
+
+
+
+
+    // let allTd = document.getElementsByTagName("td")
+    // for (let element of allTd) {
+
+    //     if (!element.textContent) {
+    //         //  console.log(element.id)
+    //         //  continue
+    //         let arrTreeForTd = findTreeArraysForOneTd(element);
+    //         let isDone = findNumberByCount(arrTreeForTd, element);
+    //         if (isDone) { return true }
+    //     }
+    // return
+
+    // }
 
 }
 ///////////////////////

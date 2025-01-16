@@ -48,7 +48,7 @@ function makeTable() {
                 // tdElement.textContent = row+'/'+coll;
             })
             tdElement.addEventListener('click', () => {
-                tdElement.textContent = " "
+                tdElement.textContent = ""
                 count = 0
             })
             let tdString = String(td_id)
