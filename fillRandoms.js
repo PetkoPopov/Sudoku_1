@@ -27,6 +27,7 @@ function fillHalfTable() {
         }
     }
 }
+
 /**
  * попълва първите три реда е три колони с правилни случайни числа
  */
@@ -35,12 +36,9 @@ function fill3Raws(){
     var allTdElements = document.getElementsByTagName('td');
     let nums=[1,2,3,4,5,6,7,8,9]
     for(let i=0; i<9; i ++ ){
-       
+  
     }
-
 }
-
-
 
 function fillCellId() {
 
@@ -52,15 +50,7 @@ function fillCellId() {
 
 
 
-function clearTable() {
 
-    var allTdElements = document.getElementsByTagName('td');
-    for (let td of allTdElements) {
-        td.textContent = "";
-        td.style.backgroundColor="rgb(57, 219, 165)";
-
-    }
-}
 
 
 

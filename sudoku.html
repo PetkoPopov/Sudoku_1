@@ -5,7 +5,7 @@
 <body>
         <!-- <body style="background-color: rgb(143, 219, 57);"></body> -->
 
-        <div>
+        <div class="table">
                 <table>
 
                 </table>
@@ -22,18 +22,17 @@
                         Table</button>
                 <button onclick="fillCellId()" class="button" style="background-color: rgb(93, 145, 80);">fill Cell
                         Id</button>
-
                 <button onclick="swichHover()" id="hover" style="background-color:rgb(170, 79, 27)">Swich
                         Hover</button>
+                <button onclick="save()" id="save">Save</button>
+                <button onclick="restore()" id="restore">Restore</button>
 
 
-
-
-                <button onclick="eraseError()" style="background-color: rgb(80, 245, 65);
+                <button onclick="eraseError()" class="error" style="background-color: rgb(80, 245, 65);
  width:106px;height: 44px;border-radius: 5px ;
  border-color: rgb(124, 42, 201);">Erase Error</button>
 
-                <button onclick="showAllErrors()" style="background-color: rgb(245, 65, 206);width:106px ; height: 44px ;  border-radius: 5px ;
+                <button onclick="showAllErrors()" class="error" "background-color: rgb(245, 65, 206);width:106px ; height: 44px ;  border-radius: 5px ;
  border-color: rgb(19, 6, 90);
  color:rgb(29, 29, 13);
  "> SHOW ERRORS </button>

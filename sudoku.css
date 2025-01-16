@@ -31,7 +31,7 @@ body {
 }
 
 .clear:hover {
-    background-color: blue;
+    background-color: rgb(179, 255, 0);
 }
 
 #calc:hover {
@@ -46,8 +46,73 @@ body {
     height: 44px;
     border-radius: 25%;
     box-shadow: 10px 10px darkblue;
-    background-color:forestgreen;
+    background-color: rgb(139, 34, 111);
 }
+
 #fillTreeRaws:hover {
-background-color: aqua;
+    background-color: aqua;
+}
+
+#hover {
+    position: fixed;
+    top: 250px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px rgb(223, 238, 4);
+    background-color: rgb(85, 212, 17);
+}
+
+#hover:hover {
+    background-color: aqua;
+}
+
+.error {
+    position: fixed;
+    top: 250px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgb(237, 128, 18);
+
+}
+
+.error:hover {
+    background-color: aqua;
+}
+
+#save {
+    position: fixed;
+    top: 350px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgba(12, 238, 53, 0.725);
+    
+
+}
+
+#save:hover {
+    background-color: aqua;
+}
+#restore {
+    position: fixed;
+    top: 400px;
+    left: 750px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgb(102, 225, 102);
+
+
+}
+
+#restore:hover {
+    background-color: aqua;
 }
