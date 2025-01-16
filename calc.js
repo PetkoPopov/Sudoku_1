@@ -1,153 +1,21 @@
-
-const allTd = document.getElementsByTagName('td');
-
-const totalArr = getToatalArr();
+// const totalArr = getTotalArr();
 
 var saveTable = [];
-
+var sudokuArr = [];
 /**
  * return boolean
  */
 function calc() {
-    
-    var rowArr = [];
-    var arrColl1 = [];
-    var arrColl2 = [];
-    var arrColl3 = [];
-    var arrColl4 = [];
-    var arrColl5 = [];
-    var arrColl6 = [];
-    var arrColl7 = [];
-    var arrColl8 = [];
-    var arrColl9 = [];
-    var sqr1 = [];
-    var sqr2 = [];
-    var sqr3 = [];
-    var sqr4 = [];
-    var sqr5 = [];
-    var sqr6 = [];
-    var sqr7 = [];
-    var sqr8 = [];
-    var sqr9 = [];
 
-    var totalArr = [];
-    let counter = 0;
-
-
-    for (let td of allTd) {
-
-
-        /// ////////////////////////////
-        ////правим масивите на редовете
-        /////////////////////////////////
-        rowArr.push(td);
-        if ((counter + 1) % 9 == 0) {
-            totalArr.push(rowArr);
-            rowArr = [];
-        }
-
-        ///////////////////////////////
-        //тука създаваме масиви на колоните 
-        ///////////////////////////////
-        if (counter % 9 == 0) {
-            arrColl1.push(td);
-        } else if (counter % 9 == 1) {
-            arrColl2.push(td)
-        } else if (counter % 9 == 2) {
-            arrColl3.push(td);
-        } else if (counter % 9 == 3) {
-            arrColl4.push(td);
-        } else if (counter % 9 == 4) {
-            arrColl5.push(td);
-        } else if (counter % 9 == 5) {
-            arrColl6.push(td);
-        } else if (counter % 9 == 6) {
-            arrColl7.push(td);
-        } else if (counter % 9 == 7) {
-            arrColl8.push(td);
-        } else if (counter % 9 == 8) {
-            arrColl9.push(td);
-        }
-        //////////////////////////
-        //правим масивите по кутии
-        ///////////////////////////
-        if ((counter % 9 == 0 || counter % 9 == 1 || counter % 9 == 2) && counter <= 20) {
-            sqr1.push(td);
-        } else if ((counter % 9 == 3 || counter % 9 == 4 || counter % 9 == 5) && counter <= 23) {
-            sqr2.push(td);
-        } else if ((counter % 9 == 6 || counter % 9 == 7 || counter % 9 == 8) && counter <= 26) {
-            sqr3.push(td);
-        } else if ((counter % 9 == 0 || counter % 9 == 1 || counter % 9 == 2) && counter <= 47) {
-            sqr4.push(td);
-        } else if ((counter % 9 == 3 || counter % 9 == 4 || counter % 9 == 5) && counter <= 50) {
-            sqr5.push(td);
-        } else if ((counter % 9 == 6 || counter % 9 == 7 || counter % 9 == 8) && counter <= 53) {
-            sqr6.push(td);
-        } else if ((counter % 9 == 0 || counter % 9 == 1 || counter % 9 == 2) && counter <= 74) {
-            sqr7.push(td);
-        } else if ((counter % 9 == 3 || counter % 9 == 4 || counter % 9 == 5) && counter <= 77) {
-            sqr8.push(td)
-        } else if ((counter % 9 == 6 || counter % 9 == 7 || counter % 9 == 8)) {
-            sqr9.push(td);
-        }
-
-
-
-        counter++;
-    }
-    console.log(rowArr)
-
-    totalArr.push(arrColl1);
-    totalArr.push(arrColl2);
-    totalArr.push(arrColl3);
-    totalArr.push(arrColl4);
-    totalArr.push(arrColl5);
-    totalArr.push(arrColl6);
-    totalArr.push(arrColl7);
-    totalArr.push(arrColl8);
-    totalArr.push(arrColl9);
-
-    totalArr.push(sqr1);
-    totalArr.push(sqr2);
-    totalArr.push(sqr3);
-    totalArr.push(sqr4);
-    totalArr.push(sqr5);
-    totalArr.push(sqr6);
-    totalArr.push(sqr7);
-    totalArr.push(sqr8);
-    totalArr.push(sqr9);
-    //console.log(totalArr);
-    var tenArrHlp = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    var isDone = false;
-    // var arrTreeForTd = [];
-    // for (let td of allTd) {
-    //     // console.log(typeof(td.textContent))
-    //     if (td.textContent == '') {
-
-    //         var arrTreeForTd = findTreeArraysForOneTd(totalArr, td);
-    //         isDone = findNumberByCount(arrTreeForTd, td);
-
-    //         if (isDone) break;
-    //     }
-
-    // }
+    /////////////////////////////////////////
     let a = findNumberByCount2();
-    /////////////////////////////////////////
-    ///
-    ///   при кликане на бутона
-    ///
-    /////////////////////////////////////////
-
-    /////////////////////////////
     //
-    let b = findNumberByAnalise(totalArr);
+    let b = findNumberByAnalise();
     //
+    let c = findNumberAnlaseByColumn();
     //
-    let c = findNumberAnlaseByColumn(totalArr);
-    //
+    let d = findNumberBySqrAnalise();
     ///////////////////////////////////////////////////
-
-    let d = findNumberBySqrAnalise(totalArr);
     if (a || b || c || d) { return true } else { return false; }
 
 }
@@ -156,8 +24,8 @@ function calc() {
  * 
  * анлизира хоризонтали 
  */
-function findNumberByAnalise(totalArr) {
-
+function findNumberByAnalise(arr) {
+    let totalArr = getTotalArr()
     //////////////////////////
     //
     // Вземаме масивите един по един и виждаме кои числа им липсват
@@ -330,12 +198,12 @@ function findNumberByCount(arrTreeForTd, td) {
         tenArrHlp = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
         for (let singleArr of arr) {
 
-            //////////////// 
+            ////////////////////////////////////////////////////////// 
             //   singlrArr  е един от трите масива
             //   разбиваме вземаме текст контекста
             //   и сравняваме 
             //   singlrArr е масив с бутони НЕ със стойности
-            ///////////////////
+            /////////////////////////////////////////////////////////
 
             for (let val of singleArr) {
                 //   console.log(val.textContent+'/ char is---> '+char);
@@ -365,12 +233,16 @@ function findNumberByCount(arrTreeForTd, td) {
 ////////////////////////////////
 ////////////////////////////
 
-function findTreeArraysForOneTd(totalArr, td) {
+function findTreeArraysForOneTd(td) {
+    console.log("3 for td --->no td")
+    return
+    let totalArr = getTotalArr()
     let arrTreeForTd = [];
     counter = 0;
     let hlpArr = [];
     for (let arr of totalArr) {
         for (let tdFromTotal of arr) {
+            // console.log("in find 3 for td td.id--->",td.id)
             if (tdFromTotal.id === td.id) {
                 counter++;
                 hlpArr.push(arr);
@@ -380,6 +252,8 @@ function findTreeArraysForOneTd(totalArr, td) {
         if (counter == 3) break;
     }
     arrTreeForTd.push(hlpArr);
+    showIF("3 for td ")
+    console.log("tre for td", arrTreeForTd)
     return arrTreeForTd;
 }
 ////////////////////////////
@@ -394,9 +268,9 @@ function swichHover() {
     let hover = document.getElementById('hover');
     console.log(hover.textContent)
     //console.log(hover.textContent);
-    var allTd = document.getElementsByTagName('td');
+    let allTd = document.getElementsByTagName('td');
 
-    let totalArr = getToatalArr();
+    let totalArr = getTotalArr();
     for (let tdElement of allTd) {
 
         if (tdElement.textContent == '') continue;
@@ -450,7 +324,7 @@ function colorAllArray(arr) {
 
 ////////////////////
 /////////////////////////
-function getToatalArr() {
+function getTotalArr() {
     const allTd = document.getElementsByTagName('td');
     var rowArr = [];
     var arrColl1 = [];
@@ -479,16 +353,18 @@ function getToatalArr() {
     for (let td of allTd) {
 
 
-
+        ///////////////////////////////////////
+        ///   създаваме масивите на редовете
+        ///////////////////////////////////////
         rowArr.push(td);
         if ((counter + 1) % 9 == 0) {
             totalArr.push(rowArr);
             rowArr = [];
         }
 
-        ///////////////////////////////
-        //тука създаваме масиви на колоните 
-        ///////////////////////////////
+        ///////////////////////////////////////
+        //   тука създаваме масиви на колоните 
+        /////////////////////////////////////////
         if (counter % 9 == 0) {
             arrColl1.push(td);
         } else if (counter % 9 == 1) {
@@ -508,9 +384,9 @@ function getToatalArr() {
         } else if (counter % 9 == 8) {
             arrColl9.push(td);
         }
-        //////////////////////////
-        //правим масивите по кутии
-        ///////////////////////////
+        /////////////////////////////////
+        //   правим масивите по кутии
+        //////////////////////////////////
         if ((counter % 9 == 0 || counter % 9 == 1 || counter % 9 == 2) && counter <= 20) {
             sqr1.push(td);
         } else if ((counter % 9 == 3 || counter % 9 == 4 || counter % 9 == 5) && counter <= 23) {
@@ -561,8 +437,8 @@ function getToatalArr() {
 }
 ///////////////////////
 ////////////////////////
-function findNumberAnlaseByColumn(totalArr) {
-
+function findNumberAnlaseByColumn() {
+    let totalArr = getTotalArr()
     //////////////////////////
     //
     // Вземаме масивите един по един и виждаме кои числа им липсват
@@ -645,8 +521,8 @@ function findNumberAnlaseByColumn(totalArr) {
 
 ////////////////////////
 ///////////////////////////
-function findNumberBySqrAnalise(totalArr) {
-
+function findNumberBySqrAnalise() {
+    let totalArr = getTotalArr()
     //////////////////////////
     //
     // Вземаме масивите един по един и виждаме кои числа им липсват
@@ -743,6 +619,7 @@ function colorisedElement(id, color) {
  * @returns boolean
  */
 function error(id) {
+    const allTd = document.getElementsByTagName('td');
     let threeArr = findTreeArraysForOneTd(totalArr, allTd[id]);
     let val = allTd[id].textContent;
 
@@ -782,6 +659,7 @@ function error(id) {
 //////////////////
 
 function showAllErrors() {
+    let allTd = document.getElementsByTagName('td');
     let result = false;
     for (let tdElement of allTd) {
         if (tdElement.textContent != '') {
@@ -814,17 +692,17 @@ function eraseError() {
 ///////////
 //////////
 function findNumberByCount2() {
-    for (let td of allTd) {
-        // console.log(typeof(td.textContent))
-        if (td.textContent == '') {
 
-            var arrTreeForTd = findTreeArraysForOneTd(totalArr, td);
+
+
+    for (let td of sudokuArr) {
+        // console.log(typeof(td.textContent))
+        if (!td) {
+
+            let arrTreeForTd = findTreeArraysForOneTd(td);
             isDone = findNumberByCount(arrTreeForTd, td);
 
-            if (isDone) {
-                return true;
-                break;
-            }
+            if (isDone) return true;
         }
 
     }
@@ -835,7 +713,7 @@ function findNumberByCount2() {
 function startCalculation() {
     let res = false;
     let arrRestore = [];
-    // let ttArr = getToatalArr();
+    // let ttArr = getTotalArr();
     for (let arr in totalArr) {
         // console.log(arr);
 
@@ -878,7 +756,7 @@ function startCalculation() {
 }
 
 function continueCalc(index) {
-    let ttArr = getToatalArr();
+    let ttArr = getTotalArr();
     let arr = ttArr[index];
 
     let missNum = missingNumbers(arr);
@@ -910,7 +788,7 @@ function continueCalc(index) {
 ///////////////////
 
 function save() {
-
+    let allTd = document.getElementsByTagName('td');
     // for (let td of allTd) {
     //     if (td.textContent != '') {
     //         saveTable.unshift(td.textContent);
@@ -942,6 +820,7 @@ function clearTable() {
      * @param [] arrRestore 
      */
     function restoreByEmptyId(arrRestore = []) {
+        let allTd = document.getElementsByTagName('td');
         // console.log(save);return true;
         for (let td of allTd) {
             if (arrRestore.includes(td.id)) {
@@ -1057,7 +936,7 @@ function clearTable() {
     /////////////////
     ////////////////////
     function add() {
-
+        let allTd = document.getElementsByTagName('td');
         for (let index in totalArr) {
             let counter = 0;
             if (index < 9) {
@@ -1462,7 +1341,7 @@ function clearTable() {
     }
 
     function doSomethingAndRestore(id, number) {
-
+        let allTd = document.getElementsByTagName('td');
         let saveTable = save();
 
         ////////////////

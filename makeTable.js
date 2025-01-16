@@ -8,6 +8,7 @@ function makeTable() {
 
         let tr = document.createElement('tr');
         for (let coll = 0; coll < 9; coll++) {
+            let td_id = (row) * 9 + coll;
             let tdElement = document.createElement("td");
 
             tdElement.style.width = "55px";
@@ -37,19 +38,21 @@ function makeTable() {
                 if (count == 10) {
                     count = 0
                     tdElement.textContent = ' ';
+                    sudokuArr[td_id] = ' '
                 } else {
                     tdElement.textContent = count;
+                    sudokuArr[td_id] = count
                     // setTimeout(error(tdElement.id),3000);
                 }
 
                 // tdElement.textContent = row+'/'+coll;
             })
-            tdElement.addEventListener('click',()=>{
-             tdElement.textContent=" "
-             count = 0 
+            tdElement.addEventListener('click', () => {
+                tdElement.textContent = " "
+                count = 0
             })
-
-            tdElement.id = (row) * 9 + coll;
+            let tdString = String(td_id)
+            tdElement.setAttribute("id", tdString)
 
             tr.appendChild(tdElement);
 
