@@ -2,6 +2,9 @@
 
 var saveTable = [];
 var sudokuArr = [];
+for (let y = 0; y < 81; y++) {
+    sudokuArr[y] = 'h'
+}
 /**
  * return boolean
  */
@@ -10,13 +13,13 @@ function calc() {
     /////////////////////////////////////////
     let a = findNumberByCount2();
     //
-    let b = findNumberByAnalise();
+    // let b = findNumberByAnalise();
     //
-    let c = findNumberAnlaseByColumn();
+    // let c = findNumberAnlaseByColumn();
     //
-    let d = findNumberBySqrAnalise();
+    // let d = findNumberBySqrAnalise();
     ///////////////////////////////////////////////////
-    if (a || b || c || d) { return true } else { return false; }
+    //if (a || b || c || d) { return true } else { return false; }
 
 }
 
@@ -187,73 +190,62 @@ function missingNumbers(arr) {
 
 
 function findNumberByCount(arrTreeForTd, td) {
+    // console.log(td,arrTreeForTd)
 
+    // return
+    ////////////////////////////////
+    // вземаме първата тройка
+    // циклим три масива
+    ///////////////////////////////
     let isDone = false;
-    for (let arr of arrTreeForTd) {
+    for (let singleArr of arrTreeForTd) {
 
-        ////////////////////////////////
-        // вземаме първата тройка
-        // циклим три масива
-        ///////////////////////////////
         tenArrHlp = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        for (let singleArr of arr) {
 
-            ////////////////////////////////////////////////////////// 
-            //   singlrArr  е един от трите масива
-            //   разбиваме вземаме текст контекста
-            //   и сравняваме 
-            //   singlrArr е масив с бутони НЕ със стойности
-            /////////////////////////////////////////////////////////
+        for (let val of singleArr) {
+            //   console.log(val.textContent+'/ char is---> '+char);
+            if (tenArrHlp.includes(val.textContent)) {
 
-            for (let val of singleArr) {
-                //   console.log(val.textContent+'/ char is---> '+char);
-                if (tenArrHlp.includes(val.textContent)) {
-
-                    tenArrHlp.splice(tenArrHlp.indexOf(val.textContent), 1);
-                    //   console.log(tenArrHlp);
-                }
-
-                if (tenArrHlp.length == 1) {
-                    td.textContent = tenArrHlp[0];
-                    td.style.backgroundColor = "rgb(219,176,27)"
-                    isDone = true;
-                    break;
-                }
-
+                tenArrHlp.splice(tenArrHlp.indexOf(val.textContent), 1);
+                //   console.log(tenArrHlp);
             }
 
-
-            if (isDone) break;
+            if (tenArrHlp.length == 1) {
+                td.textContent = tenArrHlp[0];
+                td.style.backgroundColor = "rgb(219,176,27)"
+                isDone = true;
+                break;
+            }
         }
-
+        if (isDone) break;
     }
-
     return isDone;
 }
 ////////////////////////////////
 ////////////////////////////
 
 function findTreeArraysForOneTd(td) {
-    console.log("3 for td --->no td")
-    return
+
     let totalArr = getTotalArr()
     let arrTreeForTd = [];
     counter = 0;
-    let hlpArr = [];
-    for (let arr of totalArr) {
+    // let hlpArr = [];
+    for (let arr of totalArr/** 27arrays */) {
+
         for (let tdFromTotal of arr) {
             // console.log("in find 3 for td td.id--->",td.id)
             if (tdFromTotal.id === td.id) {
                 counter++;
-                hlpArr.push(arr);
+                arrTreeForTd.push(arr);
+                break;
             }
             if (counter == 3) break;
         }
         if (counter == 3) break;
     }
-    arrTreeForTd.push(hlpArr);
-    showIF("3 for td ")
-    console.log("tre for td", arrTreeForTd)
+
+    // arrTreeForTd.push(hlpArr);
+    // console.log(arrTreeForTd)
     return arrTreeForTd;
 }
 ////////////////////////////
@@ -689,23 +681,27 @@ function eraseError() {
     return result;
 }
 
-///////////
-//////////
+/**
+ * преброява числата в масива и 
+ * ако остава са едно число го слага
+ * @returns boolean
+ */
 function findNumberByCount2() {
 
-
-
-    for (let td of sudokuArr) {
-        // console.log(typeof(td.textContent))
-        if (!td) {
-
-            let arrTreeForTd = findTreeArraysForOneTd(td);
-            isDone = findNumberByCount(arrTreeForTd, td);
-
-            if (isDone) return true;
-        }
-
+    let allTd = document.getElementsByTagName("td")
+    for (let element of allTd) {
+        
+         if(!element.textContent){
+            //  console.log(element.id)
+            //  continue
+            let arrTreeForTd = findTreeArraysForOneTd(element);
+             let isDone = findNumberByCount(arrTreeForTd, element);
+             if (isDone) { return true }
+            }
+        // return
+        
     }
+
 }
 ///////////////////////
 ///////////////////

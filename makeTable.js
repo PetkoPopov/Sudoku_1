@@ -38,9 +38,9 @@ function makeTable() {
                 if (count == 10) {
                     count = 0
                     tdElement.textContent = ' ';
-                    sudokuArr[td_id] = ' '
+                    sudokuArr[td_id] = 'h'
                 } else {
-                    tdElement.textContent = count;
+                    tdElement.textContent = String(count);
                     sudokuArr[td_id] = count
                     // setTimeout(error(tdElement.id),3000);
                 }
