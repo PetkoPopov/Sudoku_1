@@ -13,11 +13,11 @@ function calc() {
     /////////////////////////////////////////
     let a = findNumberByCount2();
     //
-    // let b = findNumberByAnalise();
+    let b = findNumberByAnalise();
     //
-    // let c = findNumberAnlaseByColumn();
+    let c = findNumberAnlaseByColumn();
     //
-    // let d = findNumberBySqrAnalise();
+    let d = findNumberBySqrAnalise();
     ///////////////////////////////////////////////////
     //if (a || b || c || d) { return true } else { return false; }
 
@@ -119,25 +119,15 @@ function posible(arrVertical, arrSqr, missingNumber) {
 
     for (let tdVertcal of arrVertical) {
         if (missingNumber === tdVertcal.textContent) {
-
-            return false;
+            return false
         }
     }
     for (let tdSqr of arrSqr) {
         if (missingNumber === tdSqr.textContent) {
-
             return false;
         }
-
-
     }
-
-
-
     return true;
-
-
-
 }
 
 
@@ -186,40 +176,6 @@ function missingNumbers(arr) {
     }
     return arrNumbers;
 
-}
-
-
-function findNumberByCount(arrTreeForTd, td) {
-    // console.log(td,arrTreeForTd)
-
-    // return
-    ////////////////////////////////
-    // вземаме първата тройка
-    // циклим три масива
-    ///////////////////////////////
-    let isDone = false;
-    for (let singleArr of arrTreeForTd) {
-
-        tenArrHlp = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
-
-        for (let val of singleArr) {
-            //   console.log(val.textContent+'/ char is---> '+char);
-            if (tenArrHlp.includes(val.textContent)) {
-
-                tenArrHlp.splice(tenArrHlp.indexOf(val.textContent), 1);
-                //   console.log(tenArrHlp);
-            }
-
-            if (tenArrHlp.length == 1) {
-                td.textContent = tenArrHlp[0];
-                td.style.backgroundColor = "rgb(219,176,27)"
-                isDone = true;
-                break;
-            }
-        }
-        if (isDone) break;
-    }
-    return isDone;
 }
 ////////////////////////////////
 ////////////////////////////
@@ -582,7 +538,6 @@ function findNumberBySqrAnalise() {
                             }
                             // console.log(missNum + '<--- missNum  <>   is posible ---> ' + pos + '   arr[hollow].id---->' + arr[hollow].id);
                             // console.log('======================================')
-
                         }
 
                     }
@@ -720,23 +675,6 @@ function findNumberByCount2() {
         }
     }
 
-
-
-
-    // let allTd = document.getElementsByTagName("td")
-    // for (let element of allTd) {
-
-    //     if (!element.textContent) {
-    //         //  console.log(element.id)
-    //         //  continue
-    //         let arrTreeForTd = findTreeArraysForOneTd(element);
-    //         let isDone = findNumberByCount(arrTreeForTd, element);
-    //         if (isDone) { return true }
-    //     }
-    // return
-
-    // }
-
 }
 ///////////////////////
 ///////////////////
@@ -820,14 +758,6 @@ function continueCalc(index) {
 
 function save() {
     let allTd = document.getElementsByTagName('td');
-    // for (let td of allTd) {
-    //     if (td.textContent != '') {
-    //         saveTable.unshift(td.textContent);
-    //     }
-    // }
-    // document.write("the table is saved")b;
-    // console.log('table is saved');
-    // return saveTable;
     for (let i = 0; i < 81; i++) {
         saveTable[i] = allTd[i].textContent
     }
@@ -861,30 +791,6 @@ function clearTable() {
 
 
     }
-    /**
-     * arr масив частично попълнен с (дупки)
-     * num масив с числа които че запълнят дупките
-     * 
-     * @param [] arr 
-     * @param [] nums 
-     */
-    function fillArr(arr, nums) {
-        for (let num of nums) {
-
-            for (let a of arr) {
-
-                if (a.textContent == '') {
-
-                    a.textContent = num;
-                    break;
-                }
-            }
-
-
-        }
-        return arr;
-    }
-
     /////
     ///////////
     /**
@@ -1399,7 +1305,10 @@ function clearTable() {
 
         return true;
     }
-
+/**
+ * do some calcultion 
+ * 
+ */
     function doSomething() {
 
         for (let arr of totalArr) {
@@ -1462,3 +1371,4 @@ function showIF(text) {
         show.removeChild(el)
     }, 3000)
 }
+
