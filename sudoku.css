@@ -1,7 +1,7 @@
 #calc {
     position: fixed;
     top: 30px;
-    left: 750px;
+    left: 780px;
     border-radius: 25%;
     background-color: coral;
     width: 106px;
@@ -21,7 +21,7 @@ body {
 .clear {
     position: fixed;
     top: 100px;
-    left: 750px;
+    left: 780px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
@@ -41,7 +41,7 @@ body {
 #fillTreeRaws {
     position: fixed;
     top: 200px;
-    left: 750px;
+    left: 780px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
@@ -56,7 +56,7 @@ body {
 #hover {
     position: fixed;
     top: 250px;
-    left: 950px;
+    left: 640px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
@@ -71,7 +71,7 @@ body {
 .error {
     position: fixed;
     top: 250px;
-    left: 750px;
+    left: 780px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
@@ -87,23 +87,24 @@ body {
 #save {
     position: fixed;
     top: 350px;
-    left: 750px;
+    left: 780px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
     box-shadow: 10px 10px darkblue;
     background-color: rgba(12, 238, 53, 0.725);
-    
+
 
 }
 
 #save:hover {
     background-color: aqua;
 }
+
 #restore {
     position: fixed;
     top: 400px;
-    left: 750px;
+    left: 780px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
@@ -116,13 +117,26 @@ body {
 #restore:hover {
     background-color: aqua;
 }
+
 #shufle {
     position: fixed;
     top: 200px;
-    left: 900px;
+    left: 640px;
     width: 106px;
     height: 44px;
     border-radius: 25%;
     box-shadow: 10px 10px darkblue;
     background-color: rgb(139, 34, 111);
+}
+
+#rndSdk {
+    position: fixed;
+    top: 300px;
+    left: 640px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgb(139, 34, 111);
+
 }

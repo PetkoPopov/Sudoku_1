@@ -1409,7 +1409,12 @@ function randomSqr(arrLine) {
     let arr = arrLine.splice(2,6)
     return shufle(arrLine)
 }
-let a = shufle()
-
-fillTable(0,a)
-fillTable(18, randomSqr(a))
+function randomColl(arr){
+return shufle([arr[0],arr[3],arr[6]])
+}
+function rndSudoku(){
+    let a = shufle()
+    fillTable(0,a)
+    fillTable(18, randomSqr(a))
+    fillTable(9,randomColl(a))
+}
