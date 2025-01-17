@@ -1305,10 +1305,10 @@ function clearTable() {
 
         return true;
     }
-/**
- * do some calcultion 
- * 
- */
+    /**
+     * do some calcultion 
+     * 
+     */
     function doSomething() {
 
         for (let arr of totalArr) {
@@ -1346,13 +1346,11 @@ function clearTable() {
  * възстановява судоку до последния сейф
  */
 function restore() {
-    showIF("hello restore")
+
     let tds = document.querySelectorAll("td")
 
     for (let y = 0; y < 81; y++) {
         tds[y].textContent = saveTable[y]
-        console.log("restore table--->", saveTable[y])
-
     }
 }
 
@@ -1369,6 +1367,49 @@ function showIF(text) {
     show.appendChild(el)
     setTimeout(() => {
         show.removeChild(el)
-    }, 3000)
+    }, 500)
+}
+/**
+ * разбърква numssArr и го добавя към arr
+ * ako няма параметри връща разбъркани 
+ * числа до 9 
+ * @param {*} arr =[]
+ * @param {*} numsArr =[] 
+ * @returns array
+ */
+function shufle(arr = [], nums = []) {
+
+    if (arr.length == 0 && nums.length == 0) {
+        nums = ["1", '2', '3', '4', '5', '6', '7', '8', '9']
+    }
+    else if (arr.length !== 0 && nums.length == 0) {
+        nums = ["1", '2', '3', '4', '5', '6', '7', '8', '9']
+        for (let i = 0; i < arr.length; i++) {
+            nums.splice(nums.indexOf(arr[i]), 1)
+        }
+    }
+
+    for (let i = nums.length; i > 0; i--) {
+        let num = Math.floor(Math.random() * i)
+        arr.push(nums[num])
+        nums.splice(nums.indexOf(nums[num]), 1)
+    }
+    
+    return arr
 }
 
+function fillTable(arrIndex, arr = []) {
+    let globalArr = getTotalArr()
+
+    for (let y = 0; y < 9; y++) {
+        globalArr[arrIndex][y].textContent = arr[y]
+    }
+}
+function randomSqr(arrLine) {
+    let arr = arrLine.splice(2,6)
+    return shufle(arrLine)
+}
+let a = shufle()
+
+fillTable(0,a)
+fillTable(18, randomSqr(a))

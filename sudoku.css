@@ -116,3 +116,13 @@ body {
 #restore:hover {
     background-color: aqua;
 }
+#shufle {
+    position: fixed;
+    top: 200px;
+    left: 900px;
+    width: 106px;
+    height: 44px;
+    border-radius: 25%;
+    box-shadow: 10px 10px darkblue;
+    background-color: rgb(139, 34, 111);
+}
