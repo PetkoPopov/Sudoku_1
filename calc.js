@@ -18,6 +18,7 @@ function calc() {
     let c = findNumberAnlaseByColumn();
     //
     let d = findNumberBySqrAnalise();
+    for(let i =0 ;i<9;i++){ advancedCalcByHover(i) }
     ///////////////////////////////////////////////////
     //if (a || b || c || d) { return true } else { return false; }
 
@@ -1442,23 +1443,39 @@ function advancedCalcByHover(n/** n e число */) {
     })
 
     for (let i = 0; i < arr.length; i++) {
-        isDone = false
-        // while (!isDone) {
-
+        console.log('i->', i)
         for (let td = 0; td < arr[i].length; td++) {
 
             if (allIds.includes(arr[i][td].id)) {
-                console.log('IF Advanced')
-                arr[i].splice(td, 1)
 
+                arr[i].splice(td, 1)
+                i--
+                console.log('i in sec for', i)
+                break
             }
-            // isDone = true
-            console.log("isDone = true")
+            if (arr[i][td].textContent) {
+                arr[i].splice(td, 1)
+                i--
+                break
+            }
+
         }
 
-
-
-
     }
-    console.log(arr)
+
+    let result = []
+    for (let i of arr) {
+        if (i.length == 1) {
+            result.push(i[0].id)
+        }
+    }
+    let arrRes = getTotalArr()
+    arrRes.forEach((el) => {
+        el.forEach(e => {
+            if (result.includes(e.id)) {
+                e.textContent = n
+            }
+        })
+    })
+    
 }
