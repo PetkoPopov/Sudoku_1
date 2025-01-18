@@ -238,9 +238,6 @@ function swichHover() {
                     }
 
                 }
-
-
-
                 /////////// tdElement.style.backgroundColor = "rgb(143, 219, 57)";
             }
 
@@ -1394,7 +1391,7 @@ function shufle(arr = [], nums = []) {
         arr.push(nums[num])
         nums.splice(nums.indexOf(nums[num]), 1)
     }
-    
+
     return arr
 }
 
@@ -1405,16 +1402,63 @@ function fillTable(arrIndex, arr = []) {
         globalArr[arrIndex][y].textContent = arr[y]
     }
 }
-function randomSqr(arrLine) {
-    let arr = arrLine.splice(2,6)
+function randomSqr(arrLine = []) {
+    let arr = arrLine.splice(3, 6)
     return shufle(arrLine)
 }
-function randomColl(arr){
-return shufle([arr[0],arr[3],arr[6]])
+function randomColl(arr) {
+    return shufle([arr[0], arr[3], arr[6]])
 }
-function rndSudoku(){
+function rndSudoku() {
     let a = shufle()
-    fillTable(0,a)
+    fillTable(0, a)
     fillTable(18, randomSqr(a))
-    fillTable(9,randomColl(a))
+    fillTable(9, randomColl(a))
+}
+function advancedCalcByHover(n/** n e число */) {
+    let arr = getTotalArr()
+
+
+    let allIds = []
+    let indexArr = []
+    for (let i = 0; i < 27; i++) {
+        for (let el of arr[i]) {
+            if (n == el.textContent) {
+                for (let el of arr[i]) {
+                    if (!el.textContent && !allIds.includes(el.id)) {
+                        allIds.push(el.id)
+
+                    }
+                }
+                indexArr.push(i)
+                break
+            }
+        }
+
+    }
+    indexArr.reverse()
+    indexArr.forEach((e) => {
+        arr.splice(e, 1)
+    })
+
+    for (let i = 0; i < arr.length; i++) {
+        isDone = false
+        // while (!isDone) {
+
+        for (let td = 0; td < arr[i].length; td++) {
+
+            if (allIds.includes(arr[i][td].id)) {
+                console.log('IF Advanced')
+                arr[i].splice(td, 1)
+
+            }
+            // isDone = true
+            console.log("isDone = true")
+        }
+
+
+
+
+    }
+    console.log(arr)
 }
