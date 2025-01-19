@@ -51,6 +51,7 @@ body {
 
 #fillTreeRaws:hover {
     background-color: aqua;
+    
 }
 
 #hover {
@@ -66,6 +67,7 @@ body {
 
 #hover:hover {
     background-color: aqua;
+    cursor: pointer;
 }
 
 .error {
@@ -82,6 +84,7 @@ body {
 
 .error:hover {
     background-color: aqua;
+    cursor: pointer;
 }
 
 #save {
@@ -99,6 +102,7 @@ body {
 
 #save:hover {
     background-color: aqua;
+    cursor:pointer;
 }
 
 #restore {
@@ -115,6 +119,7 @@ body {
 }
 
 #restore:hover {
+    cursor:progress;
     background-color: aqua;
 }
 
@@ -136,7 +141,11 @@ body {
     width: 106px;
     height: 44px;
     border-radius: 25%;
-    box-shadow: 10px 10px darkblue;
-    background-color: rgb(139, 34, 111);
+    box-shadow: 10px 10px rgb(7, 79, 83);
+    background-color: rgb(107, 220, 15);
 
+}
+#rndSdk:hover{
+    background-color: rgb(195, 111, 10);
+    cursor:pointer;
 }
