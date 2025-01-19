@@ -1,4 +1,3 @@
-// const totalArr = getTotalArr();
 
 var saveTable = [];
 var sudokuArr = [];
@@ -18,7 +17,7 @@ function calc() {
     let c = findNumberAnlaseByColumn();
     //
     let d = findNumberBySqrAnalise();
-    for(let i =0 ;i<9;i++){ advancedCalcByHover(i) }
+    for (let i = 0; i < 9; i++) { advancedCalcByHover(i) }
     ///////////////////////////////////////////////////
     //if (a || b || c || d) { return true } else { return false; }
 
@@ -1375,7 +1374,7 @@ function showIF(text) {
  * @param {*} numsArr =[] 
  * @returns array
  */
-function shufle(arr = [], nums = []) {
+function shufleAdd(arr = [], nums = []) {
 
     if (arr.length == 0 && nums.length == 0) {
         nums = ["1", '2', '3', '4', '5', '6', '7', '8', '9']
@@ -1405,17 +1404,76 @@ function fillTable(arrIndex, arr = []) {
 }
 function randomSqr(arrLine = []) {
     let arr = arrLine.splice(3, 6)
-    return shufle(arrLine)
+    return shufleAdd(arrLine)
 }
 function randomColl(arr) {
-    return shufle([arr[0], arr[3], arr[6]])
+    return shufleAdd([arr[0], arr[3], arr[6]])
 }
 function rndSudoku() {
-    let a = shufle()
+    let a = shufleAdd()
     fillTable(0, a)
-    fillTable(18, randomSqr(a))
+    let rndSqr = randomSqr(a)
+    fillTable(18, rndSqr)
     fillTable(9, randomColl(a))
+    let totalArr = getTotalArr()
+    let arr_0 = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+    let arr_1 = [totalArr[0][3].textContent, totalArr[0][4].textContent, totalArr[0][5].textContent]
+    let arr_2 = [totalArr[18][3].textContent, totalArr[18][4].textContent, totalArr[18][5].textContent]
+    let arr_3 = [totalArr[18][6].textContent, totalArr[18][7].textContent, totalArr[18][8].textContent]
+
+    if (compareArr(arr_1, arr_2)) {
+
+        let arr = shufle(arr_2)
+        totalArr[2][6].textContent = arr[0]
+        totalArr[2][7].textContent = arr[1]
+        totalArr[2][8].textContent = arr[2]
+        arr = shufle(arr_3)
+        totalArr[1][3].textContent = arr[0]
+        totalArr[1][4].textContent = arr[1]
+        totalArr[1][5].textContent = arr[2]
+        let arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        arr = shufle(arrHlp)
+        totalArr[1][6].textContent = arr[0]
+        totalArr[1][7].textContent = arr[1]
+        totalArr[1][8].textContent = arr[2]
+        arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        arr = shufle(arrHlp)
+        // console.log(arrHlp)
+        totalArr[2][3].textContent = arr[0]
+        totalArr[2][4].textContent = arr[1]
+        totalArr[2][5].textContent = arr[2]
+
+    } else if (compareArr(arr_1, arr_3)) {
+        let arr = shufle(arr_3)
+        totalArr[1][6].textContent = arr[0]
+        totalArr[1][7].textContent = arr[1]
+        totalArr[1][8].textContent = arr[2]
+        arr = shufle(arr_2)
+        totalArr[2][3].textContent = arr[0]
+        totalArr[2][4].textContent = arr[1]
+        totalArr[2][5].textContent = arr[2]
+        let arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        arr = shufle(arrHlp)
+        totalArr[2][6].textContent = arr[0]
+        totalArr[2][7].textContent = arr[1]
+        totalArr[2][8].textContent = arr[2]
+        arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        arr = shufle(arrHlp)
+        // console.log(arr)
+        totalArr[1][3].textContent = arr[0]
+        totalArr[1][4].textContent = arr[1]
+        totalArr[1][5].textContent = arr[2]
+
+
+
+    }
+
+
 }
+/**
+ * 
+ * @param {*} n 
+ */
 function advancedCalcByHover(n/** n e число */) {
     let arr = getTotalArr()
 
@@ -1427,11 +1485,11 @@ function advancedCalcByHover(n/** n e число */) {
             if (n == el.textContent) {
                 for (let el of arr[i]) {
                     if (!el.textContent && !allIds.includes(el.id)) {
-                        allIds.push(el.id)
+                        allIds.push(el.id)/**   */
 
                     }
                 }
-                indexArr.push(i)
+                indexArr.push(i)/** */
                 break
             }
         }
@@ -1439,18 +1497,18 @@ function advancedCalcByHover(n/** n e число */) {
     }
     indexArr.reverse()
     indexArr.forEach((e) => {
-        arr.splice(e, 1)
+        arr.splice(e, 1)/** */
     })
 
     for (let i = 0; i < arr.length; i++) {
-        console.log('i->', i)
+
         for (let td = 0; td < arr[i].length; td++) {
 
             if (allIds.includes(arr[i][td].id)) {
 
                 arr[i].splice(td, 1)
-                i--
-                console.log('i in sec for', i)
+                i--/** */
+
                 break
             }
             if (arr[i][td].textContent) {
@@ -1477,5 +1535,17 @@ function advancedCalcByHover(n/** n e число */) {
             }
         })
     })
-    
+
+}
+
+
+/**разбърква подадения масив */
+function shufle(arr) {
+    let arrRes = []
+    for (let i = arr.length; i > 0; i--) {
+        let index = Math.floor(Math.random() * i)
+        arrRes.push(arr.splice(index, 1)[0])
+    }
+
+    return arrRes
 }
