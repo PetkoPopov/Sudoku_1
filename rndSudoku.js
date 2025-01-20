@@ -100,7 +100,7 @@ function rndSudoku() {
         /**вземаме първо число от втори ред и случайно го слагаме на 3 ред */
         /////////////////////////////////////////////////////////////////////
         let tmp = totalArr[1][0].textContent
-         let index 
+        let index = 10
         if (arr_1.includes(tmp)) {
             index = Math.floor(Math.random() * 3) + 6
             totalArr[2][index].textContent = tmp
@@ -116,22 +116,22 @@ function rndSudoku() {
         if (arr_1.includes(tmp)) {
             let arrEmptyTd = []
             for (let i = 0; i < 3; i++) {
-                if (i+6 != index ) {
-                    arrEmptyTd.push(6 + i)
+                if (i + 6 != index) {
+                    arrEmptyTd.push(6 + i)/** събираме индексите на свободните td  */
                 }
             }
-        totalArr[2][arrEmptyTd[Math.floor(Math.random()*arrEmptyTd.length)]].textContent = tmp
+            totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
         } else {
-            
-                let arrEmptyTd = []
-                for (let i = 0; i < 3; i++) {
-                    if (i + 2 != index) {
-                        arrEmptyTd.push(2 + i)/** събираме индексите на свободните td  */
-                    }
-                }
-                totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+
+            let arrEmptyTd = []
+            for (let i = 0; i < 3; i++) {
+
+                arrEmptyTd.push(3 + i)/** събираме индексите на свободните td  */
+                console.log(arrEmptyTd, '<-arrEmptyId')
             }
-        
+            totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        }
+
     }
     /**
      * работим по отвесните 3 колони
