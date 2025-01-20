@@ -49,7 +49,7 @@ function rndSudoku() {
     fillTable(9, randomColl(a))
     let totalArr = getTotalArr()
     let arr_0/**първите 3 от 1 ред */ = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
-    let arr_1/**втори   3 от 1 ред */ = [totalArr[0][3].textContent, totalArr[0][4].textContent, totalArr[0][5].textContent]
+    let arr_1/**вторите 3 от 1 ред */ = [totalArr[0][3].textContent, totalArr[0][4].textContent, totalArr[0][5].textContent]
     let arr_2/**първите 3 от 2 ред */ = [totalArr[18][3].textContent, totalArr[18][4].textContent, totalArr[18][5].textContent]
     let arr_3/**първите 3 от 3 ред */ = [totalArr[18][6].textContent, totalArr[18][7].textContent, totalArr[18][8].textContent]
 
@@ -125,12 +125,89 @@ function rndSudoku() {
 
             let arrEmptyTd = []
             for (let i = 0; i < 3; i++) {
-
-                arrEmptyTd.push(3 + i)/** събираме индексите на свободните td  */
-                console.log(arrEmptyTd, '<-arrEmptyId')
+                if (3 + i != index) {
+                    arrEmptyTd.push(3 + i)/** събираме индексите на свободните td  */
+                }
             }
             totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
         }
+        ///////////////////////////////////////////////////////////////////////////
+        ///** вземаме 3то число втори ред */                           ///////////
+        /////////////////////////////////////////////////////////////////////////
+        tmp = totalArr[1][2].textContent
+        if (arr_1.includes(tmp)) {
+            let arrEmptyTd = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[2][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        } else {
+            let arrEmptyTd = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[2][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        }
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме от 1во число 3 ред                                    //////////
+        ////////////////////////////////////////////////////////////////////////////    
+        tmp = totalArr[2][0].textContent
+        if (arr_1.includes(tmp)) {
+            let arrEmptyTd = [6, 7, 8]
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        } else {
+            let arrEmptyTd = [3, 4, 5]
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        }
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме от 2ро число 3 ред                                    //////////
+        ////////////////////////////////////////////////////////////////////////////   
+        tmp = totalArr[2][1].textContent
+        if (arr_1.includes(tmp)) {
+            let arrEmptyTd = []
+            for (let i = 6; i < 9; i++) {
+
+                if (totalArr[1][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        } else {
+            let arrEmptyTd = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[1][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[1][arrEmptyTd[Math.floor(Math.random()* arrEmptyTd.length)]].textContent = tmp
+        }
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме от 3то число 3 ред                                    //////////
+        ////////////////////////////////////////////////////////////////////////////  
+        tmp = totalArr[2][2].textContent
+        if (arr_1.includes(tmp)) {
+            let arrEmptyTd = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[1][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        }else{
+            let arrEmptyTd = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[1][i].textContent == false) {
+                    arrEmptyTd.push(i)
+                }
+            }
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+
+        }
+
 
     }
     /**
