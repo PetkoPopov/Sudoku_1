@@ -48,12 +48,12 @@ function rndSudoku() {
     fillTable(18, rndSqr)
     fillTable(9, randomColl(a))
     let totalArr = getTotalArr()
-    let arr_0 = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
-    let arr_1 = [totalArr[0][3].textContent, totalArr[0][4].textContent, totalArr[0][5].textContent]
-    let arr_2 = [totalArr[18][3].textContent, totalArr[18][4].textContent, totalArr[18][5].textContent]
-    let arr_3 = [totalArr[18][6].textContent, totalArr[18][7].textContent, totalArr[18][8].textContent]
+    let arr_0/**първите 3 от 1 ред */ = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+    let arr_1/**втори   3 от 1 ред */ = [totalArr[0][3].textContent, totalArr[0][4].textContent, totalArr[0][5].textContent]
+    let arr_2/**първите 3 от 2 ред */ = [totalArr[18][3].textContent, totalArr[18][4].textContent, totalArr[18][5].textContent]
+    let arr_3/**първите 3 от 3 ред */ = [totalArr[18][6].textContent, totalArr[18][7].textContent, totalArr[18][8].textContent]
 
-    if (compareArr(arr_1, arr_2)) {
+    if (compareArr(arr_1, arr_2)/**срв 2ра 3ка 1ви ред с 2ра 3ка 1ва кутия */) {
 
         let arr = shufle(arr_2)
         totalArr[2][6].textContent = arr[0]
@@ -75,7 +75,7 @@ function rndSudoku() {
         totalArr[2][4].textContent = arr[1]
         totalArr[2][5].textContent = arr[2]
 
-    } else if (compareArr(arr_1, arr_3)) {
+    } else if (compareArr(arr_1, arr_3)/** */) {
         let arr = shufle(arr_3)
         totalArr[1][6].textContent = arr[0]
         totalArr[1][7].textContent = arr[1]
@@ -95,9 +95,43 @@ function rndSudoku() {
         totalArr[1][3].textContent = arr[0]
         totalArr[1][4].textContent = arr[1]
         totalArr[1][5].textContent = arr[2]
-
-
-
+    } else {
+        //////////////////////////////////////////////////////////////////////
+        /**вземаме първо число от втори ред и случайно го слагаме на 3 ред */
+        /////////////////////////////////////////////////////////////////////
+        let tmp = totalArr[1][0].textContent
+         let index 
+        if (arr_1.includes(tmp)) {
+            index = Math.floor(Math.random() * 3) + 6
+            totalArr[2][index].textContent = tmp
+        } else {
+            index = Math.floor(Math.random() * 3) + 3
+            totalArr[2][index].textContent = tmp
+        }
+        ////////////////////////////////////////////////////////////////////////
+        /**вземеме 2число от 2 ред */                                ///////////
+        ////////////////////////////////////////////////////////////////////////
+        tmp = totalArr[1][1].textContent
+        ///
+        if (arr_1.includes(tmp)) {
+            let arrEmptyTd = []
+            for (let i = 0; i < 3; i++) {
+                if (i+6 != index ) {
+                    arrEmptyTd.push(6 + i)
+                }
+            }
+        totalArr[2][arrEmptyTd[Math.floor(Math.random()*arrEmptyTd.length)]].textContent = tmp
+        } else {
+            
+                let arrEmptyTd = []
+                for (let i = 0; i < 3; i++) {
+                    if (i + 2 != index) {
+                        arrEmptyTd.push(2 + i)/** събираме индексите на свободните td  */
+                    }
+                }
+                totalArr[2][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+            }
+        
     }
     /**
      * работим по отвесните 3 колони
@@ -153,6 +187,7 @@ function rndSudoku() {
 
 
     }
+    totalArr = getTotalArr()
 
 
 }
