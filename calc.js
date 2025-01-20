@@ -23,10 +23,10 @@ function calc() {
 
 }
 
-/**
- * 
- * анлизира хоризонтали 
- */
+
+/* 
+* анлизира хоризонтали 
+*/
 function findNumberByAnalise(arr) {
     let totalArr = getTotalArr()
     //////////////////////////
@@ -642,11 +642,11 @@ function eraseError() {
 function findNumberByCount2() {
 
     let arr = getTotalArr()
-    console.log('totalArr--->', arr)
+    // console.log('totalArr--->', arr)
     let countArr = 0
     for (const element of arr) {
         countArr++
-        console.log(countArr)
+        // console.log(countArr)
         let counter = 0
         let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
@@ -659,11 +659,11 @@ function findNumberByCount2() {
             }
             if (counter > 1) { break }
         }
-        console.log('counter--->', counter, nums.length)
+        // console.log('counter--->', counter, nums.length)
         if (nums.length == 1) {
 
             for (const e of element) {
-                console.log('inside if --->', nums)
+                // console.log('inside if --->', nums)
                 if (!e.textContent) {
                     e.textContent = nums[0]
                     e.style.backgroundColor = "rgb(219,176,27)"

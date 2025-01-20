@@ -183,7 +183,7 @@ function rndSudoku() {
                     arrEmptyTd.push(i)
                 }
             }
-            totalArr[1][arrEmptyTd[Math.floor(Math.random()* arrEmptyTd.length)]].textContent = tmp
+            totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
         }
         ////////////////////////////////////////////////////////////////////////////
         /// вземаме от 3то число 3 ред                                    //////////
@@ -197,7 +197,7 @@ function rndSudoku() {
                 }
             }
             totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
-        }else{
+        } else {
             let arrEmptyTd = []
             for (let i = 3; i < 6; i++) {
                 if (totalArr[1][i].textContent == false) {
@@ -207,7 +207,59 @@ function rndSudoku() {
             totalArr[1][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
 
         }
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме 1во число от първи ред                               ///////////
+        ////////////////////////////////////////////////////////////////////////////
+        totalArr = getTotalArr()
+        tmp = totalArr[0][0].textContent
+        // console.log(totalArr)
+        let arrEmptyTd = []
+        for (let i = 3; i < 9; i++) {
+            if (totalArr[19][i].textContent == false) {
+                arrEmptyTd.push(i)
+            }
+        }
+        totalArr[19][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
 
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме 2ро число от първи ред                               ///////////
+        ////////////////////////////////////////////////////////////////////////////
+
+        totalArr = getTotalArr()
+        tmp = totalArr[0][1].textContent
+        arrEmptyTd = []
+        for (let i = 3; i < 9; i++) {
+            if (totalArr[19][i].textContent == false) {
+                arrEmptyTd.push(i)
+            }
+        }
+        totalArr[19][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+        ////////////////////////////////////////////////////////////////////////////
+        /// вземаме 3то число от първи ред                               ///////////
+        ////////////////////////////////////////////////////////////////////////////
+
+        totalArr = getTotalArr()
+        tmp = totalArr[0][2].textContent
+        arrEmptyTd = []
+        for (let i = 3; i < 9; i++) {
+            if (totalArr[19][i].textContent == false) {
+                arrEmptyTd.push(i)
+            }
+        }
+        totalArr[19][arrEmptyTd[Math.floor(Math.random() * arrEmptyTd.length)]].textContent = tmp
+
+        findNumsByCount()
+        totalArr = getTotalArr()
+        let arrDouble = findMissNums(20)
+        arrEmptyTd = []
+        for (let i = 3; i < 9; i++) {
+            if (totalArr[20][i].textContent == false) {
+                arrEmptyTd.push(i)
+            }
+        }
+        let a = shufle(arrDouble)
+        totalArr[20][arrEmptyTd[0]].textContent = a[0]
+        totalArr[20][arrEmptyTd[1]].textContent = a[1]
 
     }
     /**
@@ -344,4 +396,36 @@ function shufle(arr) {
     }
 
     return arrRes
+}
+function findNumsByCount() {
+    let totalArr = getTotalArr()
+    for (let i = 0; i < 27; i++) {
+        let emptyTd = []
+        nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        for (let y = 0; y < 9; y++) {
+            if (totalArr[i][y].textContent == false) {
+                emptyTd.push(y)
+            } else {
+                nums.splice(nums.indexOf(totalArr[i][y].textContent), 1)
+            }
+            if (emptyTd.length > 1) { break }
+            else if (emptyTd.length == 1 && nums.length == 1) {
+                totalArr[i][emptyTd[0]].textContent = nums[0]
+            }
+        }
+    }
+}
+/**
+ * връща масив с липсващите числа до 9
+ */
+function findMissNums(index) {
+
+    let totalArr = getTotalArr()
+    nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    for (let i = 0; i < 9; i++) {
+        if (nums.includes(totalArr[index][i].textContent)) {
+            nums.splice(nums.indexOf(totalArr[index][i].textContent), 1)
+        }
+    }
+    return nums
 }
