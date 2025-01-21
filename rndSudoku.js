@@ -315,6 +315,158 @@ function rndSudoku() {
 
 
 
+    } else {
+        ////   първо число 2колона  ///////////////////////////////////////////
+        totalArr = getTotalArr()
+        let tmp = totalArr[10][0].textContent
+        if (arr_3.includes(tmp)) {
+            totalArr[11][Math.floor(Math.random() * 3) + 6].textContent = tmp
+        } else {
+            totalArr[11][Math.floor(Math.random() * 3) + 3].textContent = tmp
+        }
+        /////// второ число 2колона //////////////////////////
+        tmp = totalArr[10][1].textContent
+        totalArr = getTotalArr()
+        if (arr_3.includes(tmp)) {
+            let emptyTds = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[11][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[11][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        } else {
+            let emptyTds = [];
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[11][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[11][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        }
+        /////// трето число 2колона /////////////////////////////////////////////////////////////
+        tmp = totalArr[10][2].textContent
+
+        if (arr_3.includes(tmp)) {
+            let emptyTds = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[11][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[11][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        } else {
+            let emptyTds = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[11][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[11][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        }
+
+        ////// първо число 3колона //////////////////////////////////////////////// 
+        tmp = totalArr[11][0].textContent
+        if (arr_3.includes(tmp)) {
+            totalArr[10][Math.floor(Math.random() * 3) + 6].textContent = tmp
+        } else {
+
+            totalArr[10][Math.floor(Math.random() * 3) + 3].textContent = tmp
+        }
+        ////////// второ число 3колона /////////////////////////////////////////
+        tmp = totalArr[11][1].textContent
+        totalArr = getTotalArr()
+        if (arr_3.includes(tmp)) {
+            let emptyTds = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[10][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[10][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        } else {
+
+            let emptyTds = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[10][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[10][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+
+        }
+        //////  трето число 3колона /////////////////////////////////////////////////////////////
+        tmp = totalArr[11][2].textContent
+        if (arr_3.includes(tmp)) {
+            let emptyTds = []
+            for (let i = 6; i < 9; i++) {
+                if (totalArr[10][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[10][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        } else {
+
+            let emptyTds = []
+            for (let i = 3; i < 6; i++) {
+                if (totalArr[10][i].textContent == false) {
+                    emptyTds.push(i)
+                }
+            }
+            totalArr[10][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+
+        }
+        //////// първо число 1колона ////////////////////////////////////////////////////////////////
+        tmp = totalArr[9][0].textContent
+        totalArr = getTotalArr()
+        let emptyTds = []
+        let rndTenOrEleven = Math.floor(Math.random() * 2) + 10
+        let i
+        let final
+        if (rndTenOrEleven == 10) {
+            i = 3; final = 6
+        } else { i = 6; final = 9 }
+        for (i; i < final; i++) {
+            if (totalArr[rndTenOrEleven][i].textContent == false) {
+                emptyTds.push(i)
+            }
+        }
+
+        totalArr[rndTenOrEleven][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+
+        emptyTds = []
+        if (rndTenOrEleven == 10) {
+            rndTenOrEleven = 11
+        } else {
+            rndTenOrEleven = 10
+        }
+        if (rndTenOrEleven == 10) {
+            i = 3; final = 6
+        } else {
+            i = 6; final = 9
+        }
+        for (i; i < final; i++) {
+            if (totalArr[rndTenOrEleven][i].textContent == false) {
+                emptyTds.push(i)
+            }
+        }
+        totalArr[rndTenOrEleven][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+
+
+        /////////// второ число 1колона /////////////////////////////////////////////////////////////
+        // tmp = totalArr[9][1].textContent
+        // totalArr = getTotalArr()
+        // emptyTds = []
+        // for (let i = 3; i < 9; i++) {
+        //     if (totalArr[21][i].textContent == false) {
+        //         emptyTds.push(i)
+        //     }
+        // }
+
+        // totalArr[21][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+
+        // findNumsByCount()
+        // errorsEasy()
     }
     totalArr = getTotalArr()
 
@@ -397,6 +549,12 @@ function shufle(arr) {
 
     return arrRes
 }
+/**
+ * слага числото в таблицата
+ * без параметър
+ * връща масив с липсващи числа
+ *  
+ */
 function findNumsByCount() {
     let totalArr = getTotalArr()
     for (let i = 0; i < 27; i++) {
@@ -414,6 +572,7 @@ function findNumsByCount() {
             }
         }
     }
+    return nums
 }
 /**
  * връща масив с липсващите числа до 9
@@ -428,4 +587,27 @@ function findMissNums(index) {
         }
     }
     return nums
+} 
+function errorsEasy(){
+    let totalArr=getTotalArr()
+for (let arr of totalArr) {
+    /////////////////////////////////
+    // 27масива          ////////////
+    /////////////////////////////////
+    for(let el of arr){
+        counter = 0 
+        for(let td of arr ){
+            if(el.textContent == td.textContent){
+                counter++
+                if(counter > 1){
+                    td.style.backgroundColor = 'red'
+                }   
+            }
+            
+        }
+       
+    }
+
+}
+
 }

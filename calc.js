@@ -181,8 +181,8 @@ function missingNumbers(arr) {
 ////////////////////////////
 
 function findTreeArraysForOneTd(td) {
-    console.log(td)
-    return
+    // console.log(td)
+    // return
     let totalArr = getTotalArr()
     let arrTreeForTd = [];
     counter = 0;
@@ -565,6 +565,7 @@ function colorisedElement(id, color) {
  */
 function error(id) {
     const allTd = document.getElementsByTagName('td');
+    totalArr = getTotalArr()
     let threeArr = findTreeArraysForOneTd(totalArr, allTd[id]);
     let val = allTd[id].textContent;
 
@@ -576,28 +577,18 @@ function error(id) {
             //   вземам първия от трите масива
             //
             //////////////////////
-            for (let a of array) {
-
-
-                if (a.textContent == val && a.id !== allTd[id].id) {
-                    setTimeout(function () {
+            for (let td of array) {
+                if (td.textContent == val && td.id !== id) {
                         allTd[id].style.backgroundColor = "rgb(170,24,134)";
-                    })
-
+                
                     setTimeout(function () {
                         allTd[id].style.backgroundColor = "rgb(57, 219, 165)";
                     }, 6000);
                     return true;
                 }
-
-
             }
-
         }
-
     }
-
-
 }
 
 //////////////////////
