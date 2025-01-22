@@ -42,6 +42,7 @@ function randomColl(arr) {
     return shufleAdd([arr[0], arr[3], arr[6]])
 }
 function rndSudoku() {
+    clearTable();
     let a = shufleAdd()
     fillTable(0, a)
     let rndSqr = randomSqr(a)
@@ -301,12 +302,12 @@ function rndSudoku() {
         totalArr[10][6].textContent = arr[0]
         totalArr[10][7].textContent = arr[1]
         totalArr[10][8].textContent = arr[2]
-        let arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        let arrHlp = [totalArr[11][0].textContent, totalArr[11][1].textContent, totalArr[11][2].textContent]
         arr = shufle(arrHlp)
         totalArr[10][3].textContent = arr[0]
         totalArr[10][4].textContent = arr[1]
         totalArr[10][5].textContent = arr[2]
-        arrHlp = [totalArr[0][0].textContent, totalArr[0][1].textContent, totalArr[0][2].textContent]
+        arrHlp = [totalArr[10][0].textContent, totalArr[10][1].textContent, totalArr[10][2].textContent]
         arr = shufle(arrHlp)
         // console.log(arr)
         totalArr[11][6].textContent = arr[0]
@@ -452,25 +453,42 @@ function rndSudoku() {
         }
         totalArr[rndTenOrEleven][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
 
+        ///////////////////////////////////////////////////////////////////////////////////  
+        /////////// второ число 1колона ///////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
 
-        /////////// второ число 1колона /////////////////////////////////////////////////////////////
-        // tmp = totalArr[9][1].textContent
-        // totalArr = getTotalArr()
-        // emptyTds = []
-        // for (let i = 3; i < 9; i++) {
-        //     if (totalArr[21][i].textContent == false) {
-        //         emptyTds.push(i)
-        //     }
-        // }
+        tmp = totalArr[9][1].textContent
+        totalArr = getTotalArr()
+        emptyTds = []
+        for (let i = 0; i < 9; i++) {
+            if (totalArr[21][i].textContent == false) {
+                emptyTds.push(i)
+            }
+        }
 
-        // totalArr[21][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
+        totalArr[21][emptyTds[Math.floor(Math.random() * emptyTds.length)]].textContent = tmp
 
-        // findNumsByCount()
+        findNumsByCount()
         // errorsEasy()
     }
-    totalArr = getTotalArr()
+    emptyTds = []
+    arr = getTotalArr()[24]
+    for (let i = 0; i < 9; i++) {
+        if (arr[i].textContent == false) {
+            emptyTds.push(i)
+        }
+    }
+    console.log(emptyTds, 'empty Tds')
+    if (emptyTds.length > 0) {
 
+        let nums = findMissNums(24)
 
+        nums = shufle(nums)
+        console.log('nums-->', nums, '<--nums')
+        arr[emptyTds[0]].textContent = nums[0]
+        arr[emptyTds[1]].textContent = nums[1]
+        // calc()
+    }
 }
 /**
  * 
@@ -587,27 +605,27 @@ function findMissNums(index) {
         }
     }
     return nums
-} 
-function errorsEasy(){
-    let totalArr=getTotalArr()
-for (let arr of totalArr) {
-    /////////////////////////////////
-    // 27масива          ////////////
-    /////////////////////////////////
-    for(let el of arr){
-        counter = 0 
-        for(let td of arr ){
-            if(el.textContent == td.textContent){
-                counter++
-                if(counter > 1){
-                    td.style.backgroundColor = 'red'
-                }   
-            }
-            
-        }
-       
-    }
-
 }
+function errorsEasy() {
+    let totalArr = getTotalArr()
+    for (let arr of totalArr) {
+        /////////////////////////////////
+        // 27масива          ////////////
+        /////////////////////////////////
+        for (let el of arr) {
+            counter = 0
+            for (let td of arr) {
+                if (el.textContent == td.textContent && td.textContent != false) {
+                    counter++
+                    if (counter > 1) {
+                        td.style.backgroundColor = 'red'
+                    }
+                }
+
+            }
+
+        }
+
+    }
 
 }
