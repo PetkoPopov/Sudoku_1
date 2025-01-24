@@ -8,19 +8,48 @@ for (let y = 0; y < 81; y++) {
  * return boolean
  */
 function calc() {
-
+    console.log('calc()')
     /////////////////////////////////////////
     let a = findNumberByCount2();
+    // confirm('findNumberByCount2()')
     //
     let b = findNumberByAnalise();
+    // confirm('findNumber by anlyse()')
     //
     let c = findNumberAnlaseByColumn();
+    // confirm("findNumbeAnaliseByColumn()")
     //
     let d = findNumberBySqrAnalise();
+    // confirm("SqrAnalise()")
     for (let i = 0; i < 9; i++) { advancedCalcByHover(i) }
+    calcByAll()
     ///////////////////////////////////////////////////
     //if (a || b || c || d) { return true } else { return false; }
 
+}
+function calcByAll() {
+
+    let Tds = document.getElementsByTagName('td')
+    for (let i = 30; i < 81; i++) {
+        let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        if (i % 9 == 0) { i += 3 }
+        if (Tds[i].textContent != false) { continue }
+        let treeArr = findTreeArraysForOneTd(Tds[i])
+        treeArr.forEach(arr => {
+            arr.forEach(e => {
+                if (nums.includes(e.textContent)) {
+                    nums.splice(nums.indexOf(e.textContent), 1)
+                }
+            })
+        })
+        // Tds[i].style.fontSize='4px'
+        if (nums.length == 1) {
+            console.log('insisde Tds.length in calc()')
+            Tds[i].textContent = nums[0]
+        }
+    }
+
+console.log('byAll()')
 }
 
 
@@ -104,6 +133,7 @@ function findNumberByAnalise(arr) {
 
         // break; // този break взема само първия масив
     }
+    console.log('ByAnalyse()')
     return result;
 }
 
@@ -179,7 +209,9 @@ function missingNumbers(arr) {
 }
 ////////////////////////////////
 ////////////////////////////
-
+/**
+ * param {td element}
+ */
 function findTreeArraysForOneTd(td) {
     // console.log(td)
     // return
@@ -401,6 +433,7 @@ function findNumberAnlaseByColumn() {
             ////////////////
             var hlp = 10;
 
+            // confirm('anlyse by column',countArr)
             var numHlp = 0;
             /// сега arr е само един масив проверяваме кои цифри му липсват
             //////////////////////////////////////////////
@@ -408,7 +441,6 @@ function findNumberAnlaseByColumn() {
             /////////////////////////////////////////////
             /// за всяко липсващо число проверяваме дали е възможно да е на тази колона 
             ///////////////////////////////////////
-
             for (let missNum of missNumbers) {
                 let breakHllp = false;
                 if (breakHllp) {
@@ -462,6 +494,7 @@ function findNumberAnlaseByColumn() {
 
         }
     }
+    console.log('ByColumn()')
     return result;
 }
 
@@ -546,6 +579,7 @@ function findNumberBySqrAnalise() {
 
         }
     }
+    console.log('SQRanalyse()')
     return result;
 }
 
@@ -579,8 +613,8 @@ function error(id) {
             //////////////////////
             for (let td of array) {
                 if (td.textContent == val && td.id !== id) {
-                        allTd[id].style.backgroundColor = "rgb(170,24,134)";
-                
+                    allTd[id].style.backgroundColor = "rgb(170,24,134)";
+
                     setTimeout(function () {
                         allTd[id].style.backgroundColor = "rgb(57, 219, 165)";
                     }, 6000);
@@ -608,22 +642,7 @@ function showAllErrors() {
     return result;
 }
 //////////////////////////
-//////////////////
-function eraseError() {
-    let result = false;
-    for (let tdElement of allTd) {
-        if (tdElement.textContent != '') {
 
-            if (error(tdElement.id)) {
-                tdElement.textContent = '';
-                tdElement.style.backgroundColor = 'rgb(57, 219, 165)'
-            }
-            result = true;
-
-        }
-    }
-    return result;
-}
 
 /**
  * преброява числата в масива и 
@@ -635,16 +654,16 @@ function findNumberByCount2() {
     let arr = getTotalArr()
     // console.log('totalArr--->', arr)
     let countArr = 0
-    for (const element of arr) {
+    for (let element of arr) {
         countArr++
         // console.log(countArr)
         let counter = 0
         let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-        for (const e of element) {
+        for (let e of element) {
             if (nums.includes(e.textContent)) {
                 nums.splice(nums.indexOf(e.textContent), 1)
-                console.log(e.textContent)
+
             } else if (!e.textContent) {
                 counter++
             }
@@ -662,87 +681,9 @@ function findNumberByCount2() {
             }
         }
     }
-
-}
-///////////////////////
-///////////////////
-
-function startCalculation() {
-    let res = false;
-    let arrRestore = [];
-    // let ttArr = getTotalArr();
-    for (let arr in totalArr) {
-        // console.log(arr);
-
-        if (arr == 18) {
-            //    console.log(totalArr[arr])
-            //    return 1;
-            let missNum = missingNumbers(totalArr[arr]);
-            let nums = test2(missNum);
-            ////////////////////////
-            ///
-            /// nums е масив с масиви с всички възможни компбинации
-            ///
-            /////////////////////////////  
-
-            let arrSave = save();
-            for (let num of nums) {
-                console.log(num);
-                fillArr(arr, num);
-                // break;
-                let hlp = true;
-                while (hlp) {
-                    hlp = calc();
-
-                }
-                if (!showAllErrors) {
-
-                    break;
-                }
-
-
-            }
-
-
-        }
-
-
-        // break;//only first array
-    }
-
+console.log('byCount_2()')
 }
 
-function continueCalc(index) {
-    let ttArr = getTotalArr();
-    let arr = ttArr[index];
-
-    let missNum = missingNumbers(arr);
-    let nums = test2(missNum);
-    ////////////////////////
-    ///
-    /// nums е масив с масиви с всички възможни компбинации
-    ///
-    /////////////////////////////  
-
-
-    for (let num of nums) {
-
-        while (!showAllErrors()) {
-
-            fillArr(arr, num);
-
-
-            if (calc()) {
-                console.log('result');
-            }
-        }
-    }
-
-    //break;// only first array
-
-}
-
-///////////////////
 
 function save() {
     let allTd = document.getElementsByTagName('td');
@@ -764,23 +705,7 @@ function clearTable() {
 
 }
 {
-    /**
-     * подаваме  id-та на клетките които искаме да нулираме 
-     * @param [] arrRestore 
-     */
-    function restoreByEmptyId(arrRestore = []) {
-        let allTd = document.getElementsByTagName('td');
-        // console.log(save);return true;
-        for (let td of allTd) {
-            if (arrRestore.includes(td.id)) {
-                td.textContent = '';
-            }
-        }
-
-
-    }
-    /////
-    ///////////
+   
     /**
      * казва кои са възможните числа за дадено място
      * @param {<td></td>} td 
@@ -810,29 +735,7 @@ function clearTable() {
         }
 
     }
-    //////////////
-    ////////////
-
-
-    function test2(arr) {
-        let result = [];
-        let num = arr.length;
-        let numCount = Math.pow(num, num);
-        for (let i = 0; i < numCount; i++) {
-            res = convert2(num, i)
-            let hlpRes = [];
-            for (let int of res) {
-                hlpRes.push(arr[int])
-            }
-            if (hlpRes.length == num) {
-                result.push(hlpRes)
-            }
-
-        }
-
-        return result;
-
-    }
+   
 
     ///////////////////////////////
     ///////////////////////////////
@@ -1259,11 +1162,6 @@ function clearTable() {
     }
 
 
-    /////////////////////
-    ///////////////////
-    function findNummberByLines() {
-
-    }
 
     function doSomethingAndRestore(id, number) {
         let allTd = document.getElementsByTagName('td');

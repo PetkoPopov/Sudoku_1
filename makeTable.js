@@ -47,6 +47,9 @@ function makeTable() {
 
                 // tdElement.textContent = row+'/'+coll;
             })
+            tdElement.addEventListener('change',()=>{
+                tdElement.style.backgroundColor = "red"
+            })
             tdElement.addEventListener('click', () => {
                 tdElement.textContent = ""
                 count = 0

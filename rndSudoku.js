@@ -302,13 +302,14 @@ function rndSudoku() {
         totalArr[10][6].textContent = arr[0]
         totalArr[10][7].textContent = arr[1]
         totalArr[10][8].textContent = arr[2]
-        let arrHlp = [totalArr[11][0].textContent, totalArr[11][1].textContent, totalArr[11][2].textContent]
-        arr = shufle(arrHlp)
+        // let arrHlp = [totalArr[9][0].textContent, totalArr[9][1].textContent, totalArr[9][2].textContent]
+
+        arr = shufle(arr_0)
         totalArr[10][3].textContent = arr[0]
         totalArr[10][4].textContent = arr[1]
         totalArr[10][5].textContent = arr[2]
-        arrHlp = [totalArr[10][0].textContent, totalArr[10][1].textContent, totalArr[10][2].textContent]
-        arr = shufle(arrHlp)
+        // arrHlp = [totalArr[9][0].textContent, totalArr[9][1].textContent, totalArr[9][2].textContent]
+        arr = shufle(arr_0)
         // console.log(arr)
         totalArr[11][6].textContent = arr[0]
         totalArr[11][7].textContent = arr[1]
@@ -519,16 +520,15 @@ function advancedCalcByHover(n/** n e число */) {
     indexArr.forEach((e) => {
         arr.splice(e, 1)/** */
     })
-
+    ///////////////////////////////////////////////////////////////////////////////////////    
+    ///////  до тук премахване от логиката тези масиви които съдържат числото n 
+    //////   за да не циклим постянно
+    ///////////////////////////////////////////////////////////////////////////////////////
     for (let i = 0; i < arr.length; i++) {
-
         for (let td = 0; td < arr[i].length; td++) {
-
             if (allIds.includes(arr[i][td].id)) {
-
                 arr[i].splice(td, 1)
-                i--/** */
-
+                i--/** връщаме се да изцклим масива отново */
                 break
             }
             if (arr[i][td].textContent) {
@@ -545,17 +545,20 @@ function advancedCalcByHover(n/** n e число */) {
     for (let i of arr) {
         if (i.length == 1) {
             result.push(i[0].id)
+            i[0].textContent = n
         }
     }
-    let arrRes = getTotalArr()
-    arrRes.forEach((el) => {
-        el.forEach(e => {
-            if (result.includes(e.id)) {
-                e.textContent = n
-            }
-        })
-    })
-
+    // let arrRes = getTotalArr()
+    // console.log(arr)
+    // arrRes.forEach((el) => {
+    //     el.forEach(e => {
+    //         if (result.includes(e.id)) {
+    //             e.textContent = n
+    //             e.style.fontSize="5px"
+    //         }
+    //     })
+    // })
+    console.log('ByHover()')
 }
 /**разбърква подадения масив */
 function shufle(arr) {
@@ -594,6 +597,7 @@ function findNumsByCount() {
 }
 /**
  * връща масив с липсващите числа до 9
+ * парам индекс на totalArr
  */
 function findMissNums(index) {
 
@@ -629,3 +633,27 @@ function errorsEasy() {
     }
 
 }
+function showNumsFTd() {
+    let Tds = document.getElementsByTagName('td')
+    for (let i = 30; i < 81; i++) {
+        let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+        if (i % 9 == 0) { i += 3 }
+        if (Tds[i].textContent != false) { continue }
+        let treeArr = findTreeArraysForOneTd(Tds[i])
+        treeArr.forEach(arr => {
+            arr.forEach(e => {
+                if (nums.includes(e.textContent)) {
+                    nums.splice(nums.indexOf(e.textContent), 1)
+                }
+            })
+        })
+        // Tds[i].style.fontSize='4px'
+        Tds[i].textContent = nums.join('')
+        console.log(Tds.length,"Tds.length")
+        if (nums.length == 1) {
+            Tds[i].style.backgroundColor = "red"
+        } else {
+            Tds[i].style.fontSize = '22px'
+        }
+    }
+} 
