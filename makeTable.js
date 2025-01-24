@@ -47,15 +47,14 @@ function makeTable() {
 
                 // tdElement.textContent = row+'/'+coll;
             })
-            tdElement.addEventListener('change',()=>{
-                tdElement.style.backgroundColor = "red"
-            })
+
             tdElement.addEventListener('click', () => {
                 tdElement.textContent = ""
                 count = 0
             })
             let tdString = String(td_id)
             tdElement.setAttribute("id", tdString)
+            
 
             tr.appendChild(tdElement);
 

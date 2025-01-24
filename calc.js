@@ -10,46 +10,47 @@ for (let y = 0; y < 81; y++) {
 function calc() {
     console.log('calc()')
     /////////////////////////////////////////
-    let a = findNumberByCount2();
-    // confirm('findNumberByCount2()')
-    //
+    // 
     let b = findNumberByAnalise();
     // confirm('findNumber by anlyse()')
     //
     let c = findNumberAnlaseByColumn();
     // confirm("findNumbeAnaliseByColumn()")
     //
-    let d = findNumberBySqrAnalise();
+    // let d = findNumberBySqrAnalise(); глупост
     // confirm("SqrAnalise()")
     for (let i = 0; i < 9; i++) { advancedCalcByHover(i) }
-    calcByAll()
+    calcByAllArrTds()
     ///////////////////////////////////////////////////
     //if (a || b || c || d) { return true } else { return false; }
 
 }
-function calcByAll() {
+function calcByAllArrTds() {
 
     let Tds = document.getElementsByTagName('td')
-    for (let i = 30; i < 81; i++) {
+    for (let i = 0; i < 81; i++) {
         let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
-        if (i % 9 == 0) { i += 3 }
+        // if (i % 9 == 0) { i += 3 }
         if (Tds[i].textContent != false) { continue }
         let treeArr = findTreeArraysForOneTd(Tds[i])
         treeArr.forEach(arr => {
             arr.forEach(e => {
                 if (nums.includes(e.textContent)) {
                     nums.splice(nums.indexOf(e.textContent), 1)
+                    // console.log(nums)
                 }
             })
         })
         // Tds[i].style.fontSize='4px'
         if (nums.length == 1) {
-            console.log('insisde Tds.length in calc()')
+            console.log('calc by treeArrTds found ==>',nums[0])
             Tds[i].textContent = nums[0]
+            Tds[i].style.backgroundColor='red'
         }
+
     }
 
-console.log('byAll()')
+
 }
 
 
@@ -133,7 +134,7 @@ function findNumberByAnalise(arr) {
 
         // break; // този break взема само първия масив
     }
-    console.log('ByAnalyse()')
+    console.log('ByAnalyse() result-->', result)
     return result;
 }
 
@@ -494,7 +495,7 @@ function findNumberAnlaseByColumn() {
 
         }
     }
-    console.log('ByColumn()')
+    console.log('ByColumn()-->', result)
     return result;
 }
 
@@ -550,7 +551,7 @@ function findNumberBySqrAnalise() {
 
                         let indexHorisontalArray = Math.floor(id / 9);
 
-                        let indexSqrArray = findIdSquare(id);
+                        // let indexSqrArray = findIdSquare(id);
                         let indexVerticalArray = (id % 9) + 9;
                         let pos = false;
                         pos = posible(totalArr[indexHorisontalArray], totalArr[indexVerticalArray], missNum);
@@ -579,7 +580,7 @@ function findNumberBySqrAnalise() {
 
         }
     }
-    console.log('SQRanalyse()')
+    console.log('SQRanalyse()-->', result)
     return result;
 }
 
@@ -649,14 +650,10 @@ function showAllErrors() {
  * ако остава са едно число го слага
  * @returns boolean
  */
-function findNumberByCount2() {
+function findNumberByCountHollowTds() {
 
     let arr = getTotalArr()
-    // console.log('totalArr--->', arr)
-    let countArr = 0
     for (let element of arr) {
-        countArr++
-        // console.log(countArr)
         let counter = 0
         let nums = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
 
@@ -669,20 +666,23 @@ function findNumberByCount2() {
             }
             if (counter > 1) { break }
         }
-        // console.log('counter--->', counter, nums.length)
-        if (nums.length == 1) {
 
-            for (const e of element) {
-                // console.log('inside if --->', nums)
+        if (nums.length == 1) {
+            ////////// вземаме втори път масива
+            for (let e of element) {
+
+                // виждаме къде е дупката 
                 if (!e.textContent) {
                     e.textContent = nums[0]
                     e.style.backgroundColor = "rgb(219,176,27)"
+                    
                 }
             }
         }
-    }
-console.log('byCount_2()')
-}
+
+    }//end for totalArr
+    console.log('byCount_2()')
+}//end function
 
 
 function save() {
@@ -705,7 +705,7 @@ function clearTable() {
 
 }
 {
-   
+
     /**
      * казва кои са възможните числа за дадено място
      * @param {<td></td>} td 
@@ -735,7 +735,7 @@ function clearTable() {
         }
 
     }
-   
+
 
     ///////////////////////////////
     ///////////////////////////////

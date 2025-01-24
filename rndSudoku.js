@@ -542,23 +542,14 @@ function advancedCalcByHover(n/** n e число */) {
     }
 
     let result = []
-    for (let i of arr) {
-        if (i.length == 1) {
-            result.push(i[0].id)
-            i[0].textContent = n
+    for (let arrTd of arr) {
+        if (arrTd.length == 1) {
+            result.push(arrTd[0].id)
+            arrTd[0].textContent = n
+            console.log('ByHover()->result', result,'id-->' , arrTd[0].id)
         }
     }
-    // let arrRes = getTotalArr()
-    // console.log(arr)
-    // arrRes.forEach((el) => {
-    //     el.forEach(e => {
-    //         if (result.includes(e.id)) {
-    //             e.textContent = n
-    //             e.style.fontSize="5px"
-    //         }
-    //     })
-    // })
-    console.log('ByHover()')
+    return result
 }
 /**разбърква подадения масив */
 function shufle(arr) {
@@ -649,7 +640,7 @@ function showNumsFTd() {
         })
         // Tds[i].style.fontSize='4px'
         Tds[i].textContent = nums.join('')
-        console.log(Tds.length,"Tds.length")
+        console.log(Tds.length, "Tds.length")
         if (nums.length == 1) {
             Tds[i].style.backgroundColor = "red"
         } else {
